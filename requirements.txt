@@ -1,0 +1,7 @@
+Flask
+Flask-Admin
+Flask-OAuthlib
+Flask-OpenID
+Flask-SQLAlchemy
+Flask-WTF
+PyJade
