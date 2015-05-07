@@ -1,0 +1,110 @@
+html
+  head
+    {% block default_style %}
+    link(rel="stylesheet", type="text/css", href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css")
+    link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/main.css'))
+    {% endblock %}
+
+    {% block style %}
+    link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/index.css'))
+    {% endblock %}
+  body
+    .container
+
+      .row.clearfix
+        .col-md-12.column
+          nav.navbar.navbar-default(role="navigation")
+            .navbar-header
+              button.navbar-toggle(type="button", data-toggle="collapse", data-target="#bs-example-navbar-collapse-1")
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+              a.navbar-brand(href="/") Programmer Sigh
+            .collapse.navbar-collapse
+              ul.nav.navbar-nav
+                li.active
+                  a(href="/admin") Admin
+                li.dropdown
+                  a.dropdown-toggle(href="#", data-toggle="dropdown")
+                    | Dropdown
+                    strong.caret
+                  ul.dropdown-menu
+                    li
+                      a(href="#") Action
+                    li.divider
+                    li
+                      a(href="#") Separated link
+              form.navbar-form.navbar-left(role="search")
+                .form-group
+                  input.form-control(type="text")
+                button.btn.btn-default(type="submit") Submit
+              ul.nav.navbar-nav.navbar-right
+                li
+
+                  a.post-new.btn.btn-default(href="", role="button", data-toggle="modal", data-target="#new") POST
+                  form#new.modal.fade(role="form")
+                    .modal-dialog
+                      .modal-content
+                        .modal-header
+                          button.close(type="button", data-dismiss="modal", aria-hidden="true") ×
+                          h4.modal-title
+                            | Modal title
+                        .modal-body
+                          .form-group
+                            label(for="") Email address
+                            input.form-control(type="text")
+                          .form-group
+                            label(for="exampleInputPassword1") Password
+                            input.form-control(type="text")
+                          .form-group
+                            p.help-block
+                              | Example block-level help text here.
+                          .checkbox
+                            label
+                              input(type="checkbox")
+                                |  Check me out
+                            button.btn.btn-default(type="submit") Submit
+                        .modal-footer
+
+                li.dropdown
+                  a.dropdown-toggle(href="#", data-toggle="dropdown")
+                    | Dropdown
+                    strong.caret
+                  ul.dropdown-menu
+                    li
+                      a(href="#") Action
+                    li
+                      a(href="#") Another action
+                    li
+                      a(href="#") Something else here
+                    li.divider
+                    li
+                      a(href="#") Separated link
+
+
+      .row.clearfix
+        .col-md-8.column
+
+          {% block main %}{% endblock %}
+
+          ul.pagination
+            li
+              a(href="#") Prev
+            li
+              a(href="#") 1
+            li
+              a(href="#") 2
+            li
+              a(href="#") 3
+            li
+              a(href="#") Next
+
+        .col-md-4.column
+          h1 Empty for something
+
+    {% block default_script %}
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
+    script(src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
+    {% endblock %}
+    {% block script %}{% endblock %}
