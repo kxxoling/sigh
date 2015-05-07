@@ -15,7 +15,8 @@ class BasicModel(object):
         pass
 
     def __unicode__(self):
-        return "<Model %s>%d: %s" % (self.__name__, self.id_, self.name)
+        return "<Model %s>%d: %s" % (self.__class__.__name__, self.id_,
+                getattr(self, 'name', None) or getattr(self, 'title', 'Untitled'))
 
 
 class User(BasicModel, db.Model):
