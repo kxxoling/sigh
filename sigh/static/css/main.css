@@ -17,3 +17,18 @@ border-color: #cdbfe3;
   border-color: #fff;
 }
 
+.footer {
+  margin-top: -30px;
+  height: 30px;
+  background-color: #eee;
+}
+
+.container {
+  min-height: 100%;
+}
+
+.container > .main.row {
+  padding-bottom: 30px;
+  overflow: hidden;
+}
+

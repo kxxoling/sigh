@@ -11,7 +11,7 @@ html
   body
     .container
 
-      .row.clearfix
+      .row.clearfix.menu-bar
         .col-md-12.column
           nav.navbar.navbar-default(role="navigation")
             .navbar-header
@@ -83,7 +83,7 @@ html
                       a(href="#") Separated link
 
 
-      .row.clearfix
+      .row.clearfix.main
         .col-md-8.column
 
           {% block main %}{% endblock %}
@@ -102,6 +102,13 @@ html
 
         .col-md-4.column
           h1 Empty for something
+
+
+    .footer
+      .contact-message
+        ul
+          li
+            a(href='/') Meaningless link
 
     {% block default_script %}
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
