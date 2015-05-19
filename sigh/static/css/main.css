@@ -32,3 +32,11 @@ border-color: #cdbfe3;
   overflow: hidden;
 }
 
+.avatar.middle {
+  height: 50px;
+  width: 50px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url(https://i0.wp.com/developer.files.wordpress.com/2013/01/60b40db1e3946a29262eda6c78f33123.jpg?w=64)
+}
+
