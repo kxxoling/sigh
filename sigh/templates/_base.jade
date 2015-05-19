@@ -11,7 +11,7 @@ html
   body
     .container
 
-      .row.clearfix
+      .row.clearfix.menu-bar
         .col-md-12.column
           nav.navbar.navbar-default(role="navigation")
             .navbar-header
@@ -21,24 +21,19 @@ html
                 span.icon-bar
                 span.icon-bar
               a.navbar-brand(href="/") Programmer Sigh
+
             .collapse.navbar-collapse
               ul.nav.navbar-nav
-                li.active
+                li
+                  a(href="/") Home
+                li
                   a(href="/admin") Admin
-                li.dropdown
-                  a.dropdown-toggle(href="#", data-toggle="dropdown")
-                    | Dropdown
-                    strong.caret
-                  ul.dropdown-menu
-                    li
-                      a(href="#") Action
-                    li.divider
-                    li
-                      a(href="#") Separated link
+
               form.navbar-form.navbar-left(role="search")
                 .form-group
                   input.form-control(type="text")
-                button.btn.btn-default(type="submit") Submit
+                button.btn.btn-default(type="submit") Search
+
               ul.nav.navbar-nav.navbar-right
                 li
 
@@ -68,22 +63,16 @@ html
                         .modal-footer
 
                 li.dropdown
-                  a.dropdown-toggle(href="#", data-toggle="dropdown")
-                    | Dropdown
-                    strong.caret
+                  a.avatar.middle.dropdown-toggle(href="#", data-toggle="dropdown", style="")
                   ul.dropdown-menu
                     li
-                      a(href="#") Action
-                    li
-                      a(href="#") Another action
-                    li
-                      a(href="#") Something else here
+                      a(href="#") Profile
                     li.divider
                     li
-                      a(href="#") Separated link
+                      a(href="#") Logout
 
 
-      .row.clearfix
+      .row.clearfix.main
         .col-md-8.column
 
           {% block main %}{% endblock %}
@@ -102,6 +91,13 @@ html
 
         .col-md-4.column
           h1 Empty for something
+
+
+    .footer
+      .contact-message
+        ul
+          li
+            a(href='/') Meaningless link
 
     {% block default_script %}
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
