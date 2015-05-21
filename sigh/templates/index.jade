@@ -22,8 +22,10 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/ind
           .modal-footer
             button.btn.btn-default(type="button", data-dismiss="modal") Close
             button.btn.btn-primary(type="button") Save changes
-
-  span.label.label-default Label
+  .tags
+    {% for tag in sigh.tags %}
+    span.label.label-default {{ tag.display_name }}
+    {% endfor %}
 
 hr
 {% endfor %}

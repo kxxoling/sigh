@@ -7,8 +7,13 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/sig
 {% block main %}
 .sigh
   p {{ sigh.content or 'Empty!' }}
-  span.label.label-default Label
 
+  {% if sigh.tags %}
+  .tags
+    {% for tag in sigh.tags %}
+    span.label.label-default {{ tag.display_name }}
+    {% endfor %}
+  {% endif %}
 hr
 
 .comment-group

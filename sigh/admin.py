@@ -1,7 +1,7 @@
 from flask.ext.admin.contrib.sqla import ModelView
 from flask.ext.admin import Admin
 
-from .models import User, Sigh
+from .models import User, Sigh, Tag
 
 
 class AdminRequiredView(ModelView):
@@ -13,4 +13,4 @@ def register_admin(app, db):
     admin = Admin(app, endpoint='admin', template_mode='bootstrap3')
     admin.add_view(AdminRequiredView(User, db.session))
     admin.add_view(AdminRequiredView(Sigh, db.session))
-
+    admin.add_view(AdminRequiredView(Tag, db.session))
