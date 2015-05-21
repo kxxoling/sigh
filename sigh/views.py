@@ -5,7 +5,7 @@ from flask import render_template
 from flask import url_for, session, request, redirect, flash
 from flask.ext.oauthlib.client import OAuth
 
-from .models import Sigh
+from .models import Sigh, Tag
 from .models import db
 
 
@@ -50,8 +50,11 @@ def post_sigh():
         type_ = 'sigh'
     content = request.form.get('content')
     is_anonymous = (request.form.get('is_anonymous') == 'on') or False
-    sigh = Sigh(type_=type_, content=content, is_anonymous=is_anonymous, creater_id=1,
+    tags = request.form.getlist('tags')
+    tag_models = filter(lambda x: x, [Tag.query.filter_by(name=tag).first() for tag in tags])
+    sigh = Sigh(type_=type_, content=content, is_anonymous=is_anonymous, creator_id=1,
                 create_time=datetime.datetime.now())
+    sigh.tags.extend(tag_models)
     db.session.add(sigh)
     db.session.commit()
     return redirect(url_for('frontend.render_sigh', sigh_id=sigh.id_))

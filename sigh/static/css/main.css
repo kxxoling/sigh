@@ -53,3 +53,7 @@ border-color: #cdbfe3;
 .sigh p {
   font-size: 18px;
 }
+
+form#new .select2 {
+  width: 100% !important;
+}
