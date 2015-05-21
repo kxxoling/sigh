@@ -36,3 +36,5 @@ class Sigh(BasicModel, db.Model):
     creater_id = db.Column(db.Integer, db.ForeignKey('users.id_'))
     create_time = db.Column(db.DateTime)
     content = db.Column(db.Text)
+    type_ = db.Column(db.Enum('sigh', 'wtf', 'fml'))
+    is_anonymous = db.Column(db.Boolean)

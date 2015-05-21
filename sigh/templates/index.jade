@@ -7,8 +7,6 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/ind
 {% block main %}
 {% for sigh in sighs %}
 .sigh
-  .page-header
-    h2 {{ sigh.title or 'Untitled' }}
   p {{ sigh.content or 'Empty!' }}
   div
     a.btn(href="", role="button", data-toggle="modal", data-target="#comment") Comment »
@@ -26,5 +24,21 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/ind
             button.btn.btn-primary(type="button") Save changes
 
   span.label.label-default Label
+
+hr
 {% endfor %}
+
+ul.pagination
+  li
+    a(href="#") Prev
+  li
+    a(href="#") 1
+  li
+    a(href="#") 2
+  li
+    a(href="#") 3
+  li
+    a(href="#") Next
+
 {% endblock %}
+

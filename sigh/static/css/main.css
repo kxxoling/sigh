@@ -40,3 +40,16 @@ border-color: #cdbfe3;
   background-image: url(https://i0.wp.com/developer.files.wordpress.com/2013/01/60b40db1e3946a29262eda6c78f33123.jpg?w=64)
 }
 
+.post-new.btn {
+  margin-top: 8px;
+  padding: 6px 12px;
+}
+
+.sigh {
+  margin-bottom: 15px;
+  padding: 15px;
+}
+
+.sigh p {
+  font-size: 18px;
+}

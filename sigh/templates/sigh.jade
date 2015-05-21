@@ -1,0 +1,21 @@
+{% extends "_base.jade" %}
+
+{% block style %}
+link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/sigh.css'))
+{% endblock %}
+
+{% block main %}
+.sigh
+  p {{ sigh.content or 'Empty!' }}
+  span.label.label-default Label
+
+hr
+
+.comment-group
+  div.comment
+    form.navbar-form.navbar-left.comment(role="search")
+      textarea.form-control.comment(rows="3")
+      button.btn.btn-default(type="submit") Comment
+
+{% endblock %}
+

@@ -38,30 +38,36 @@ html
                 li
 
                   a.post-new.btn.btn-default(href="", role="button", data-toggle="modal", data-target="#new") POST
-                  form#new.modal.fade(role="form")
+                  form#new.modal.fade(role="form", method="POST", action=url_for('frontend.post_sigh'))
                     .modal-dialog
                       .modal-content
                         .modal-header
                           button.close(type="button", data-dismiss="modal", aria-hidden="true") ×
-                          h4.modal-title
-                            | Modal title
+                          h4.modal-title Publish a sigh
                         .modal-body
                           .form-group
-                            label(for="") Email address
-                            input.form-control(type="text")
+                            label(for="content") Content
+                            textarea.form-control(type="text", name="content")
                           .form-group
-                            label(for="exampleInputPassword1") Password
-                            input.form-control(type="text")
-                          .form-group
-                            p.help-block
-                              | Example block-level help text here.
+                            label(for="type_") Type
+                            .btn-group(data-toggle='buttons')
+                              label.btn.btn-primary.active
+                                input(type='radio', name='sigh', autocomplete='off', checked='')
+                                | Sigh
+                              label.btn.btn-primary
+                                input(type='radio', name='wtf', autocomplete='off')
+                                | WTF
+                              label.btn.btn-primary
+                                input#option3(type='radio', name='fml', autocomplete='off')
+                                | FML
+
                           .checkbox
                             label
-                              input(type="checkbox")
-                                |  Check me out
+                              input(type="checkbox", name="is_anonymous")
+                              | Publish as anonymous?
                             button.btn.btn-default(type="submit") Submit
                         .modal-footer
-
+                li.placeholder(style="width: 15px; min-height: 1px;")
                 li.dropdown
                   a.avatar.middle.dropdown-toggle(href="#", data-toggle="dropdown", style="")
                   ul.dropdown-menu
@@ -76,20 +82,8 @@ html
         .col-md-8.column
 
           {% block main %}{% endblock %}
-
-          ul.pagination
-            li
-              a(href="#") Prev
-            li
-              a(href="#") 1
-            li
-              a(href="#") 2
-            li
-              a(href="#") 3
-            li
-              a(href="#") Next
-
         .col-md-4.column
+
           h1 Empty for something
 
 
