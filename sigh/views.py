@@ -1,9 +1,12 @@
+import datetime
+
 from flask import Blueprint
 from flask import render_template
 from flask import url_for, session, request, redirect, flash
 from flask.ext.oauthlib.client import OAuth
 
 from .models import Sigh
+from .models import db
 
 
 frontend_views = Blueprint('frontend', __name__, url_prefix='/')
@@ -28,6 +31,30 @@ github = oauth.remote_app(
 def index():
     sighs = Sigh.query.all()
     return render_template('index.jade', page_title='Programmer sighs!', sighs=sighs)
+
+
+@frontend_views.route('sigh/<int:sigh_id>/')
+def render_sigh(sigh_id):
+    sigh = Sigh.query.get_or_404(sigh_id)
+    return render_template('sigh.jade', page_title='Programmer sighs!', sigh=sigh)
+
+
+@frontend_views.route('new/', methods=['POST'])
+def post_sigh():
+    """TODO: Should be login required later"""
+    if request.form.get('wtf') == 'on':
+        type_ = 'wtf'
+    elif request.form.get('fml') == 'on':
+        type_ = 'fml'
+    else:
+        type_ = 'sigh'
+    content = request.form.get('content')
+    is_anonymous = (request.form.get('is_anonymous') == 'on') or False
+    sigh = Sigh(type_=type_, content=content, is_anonymous=is_anonymous, creater_id=1,
+                create_time=datetime.datetime.now())
+    db.session.add(sigh)
+    db.session.commit()
+    return redirect(url_for('frontend.render_sigh', sigh_id=sigh.id_))
 
 
 @oauth_views.route('login/')
