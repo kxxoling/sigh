@@ -1,9 +1,9 @@
 from flask import Flask
 from flask import send_file
 
-from .views import frontend_views
-from .views import oauth_views
-from .views import oauth
+from .views.frontend import frontend_views
+from .views.auth import oauth_views
+from .views.auth import oauth
 from .models import db as main_db
 from .admin import register_admin
 
@@ -40,6 +40,14 @@ def register_routes(app):
 
 
 def register_oauth(app, oauth):
+    app.config['GITHUB'].update(dict(
+        request_token_params={'scope': 'user:email'},
+        base_url='https://api.github.com/',
+        request_token_url=None,
+        access_token_method='POST',
+        access_token_url='https://github.com/login/oauth/access_token',
+        authorize_url='https://github.com/login/oauth/authorize')
+    )
     oauth.init_app(app)
 
 
