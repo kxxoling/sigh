@@ -7,7 +7,6 @@ from flask import redirect, flash, abort
 from flask.ext.oauthlib.client import OAuth
 
 from .models import Sigh, Tag
-from .models import db
 from .forms import SighForm
 
 

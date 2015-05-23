@@ -6,7 +6,6 @@ from wtforms import StringField
 from wtforms.validators import DataRequired
 
 from .models import Sigh, Tag
-from .models import db
 
 
 class TagForm(Form):
@@ -26,6 +25,5 @@ class SighForm(ModelForm):
         self.data.pop('tags')
         sigh = Sigh(**self.data)
         sigh.tags.extend(tags)
-        db.session.add(sigh)
-        db.session.commit()
+        sigh.save()
         return sigh

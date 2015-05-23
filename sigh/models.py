@@ -1,24 +1,48 @@
 import datetime
+
+from flask import jsonify
 from flask.ext.sqlalchemy import SQLAlchemy
 
 
 db = SQLAlchemy()
 
 
-class BasicModel(object):
+class BasicMixin(object):
 
     id_ = db.Column(db.Integer, primary_key=True)
     create_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)          # First time the column is created.
 
-    def to_json(self):
-        raise NotImplementedError
+    def to_json(self, *columns):
+        dct = self.to_dict(*columns)
+        for key in dct:
+            if isinstance(dct[key], datetime.datetime):
+                dct[key] = dct[key].strftime('%Y-%m-%d %H:%M:%S')
+        return jsonify(dct)
+
+    def to_dict(self, *columns):
+        dct = {}
+        for col in columns:
+            dct[col] = getattr(self, col)
+        return dct
 
     def __unicode__(self):
         return "<Model %s>%d: %s" % (self.__class__.__name__, self.id_,
                                      getattr(self, 'name', None) or getattr(self, 'title', 'Untitled'))
 
 
-class User(BasicModel, db.Model):
+class SessionMinin(object):
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+        return self
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+        return self
+
+
+class User(db.Model, BasicMixin, SessionMinin):
     __tablename__ = 'users'
 
     name = db.Column(db.String(100))
@@ -34,7 +58,7 @@ tag_identifier = db.Table('tag_identifier',
                           db.Column('sigh_id', db.Integer, db.ForeignKey('sighs.id_')))
 
 
-class Sigh(BasicModel, db.Model):
+class Sigh(db.Model, BasicMixin, SessionMinin):
     __tablename__ = 'sighs'
 
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id_'))
@@ -44,7 +68,7 @@ class Sigh(BasicModel, db.Model):
     tags = db.relationship('Tag', secondary=tag_identifier)
 
 
-class Tag(BasicModel, db.Model):
+class Tag(db.Model, BasicMixin, SessionMinin):
     __tablename__ = 'tags'
 
     name = db.Column(db.String(50), unique=True, nullable=False)
