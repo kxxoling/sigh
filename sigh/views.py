@@ -1,12 +1,14 @@
 import datetime
 
 from flask import Blueprint
-from flask import render_template
-from flask import url_for, session, request, redirect, flash
+from flask import render_template, jsonify
+from flask import url_for, session, request
+from flask import redirect, flash, abort
 from flask.ext.oauthlib.client import OAuth
 
 from .models import Sigh, Tag
 from .models import db
+from .forms import SighForm
 
 
 frontend_views = Blueprint('frontend', __name__, url_prefix='/')
@@ -42,22 +44,13 @@ def render_sigh(sigh_id):
 @frontend_views.route('new/', methods=['POST'])
 def post_sigh():
     """TODO: Should be login required later"""
-    if request.form.get('wtf') == 'on':
-        type_ = 'wtf'
-    elif request.form.get('fml') == 'on':
-        type_ = 'fml'
+
+    form = SighForm(request.form)
+    if form.validate():
+        sigh = form.save()
+        return redirect(url_for('frontend.render_sigh', sigh_id=sigh.id_))
     else:
-        type_ = 'sigh'
-    content = request.form.get('content')
-    is_anonymous = (request.form.get('is_anonymous') == 'on') or False
-    tags = request.form.getlist('tags')
-    tag_models = filter(lambda x: x, [Tag.query.filter_by(name=tag).first() for tag in tags])
-    sigh = Sigh(type_=type_, content=content, is_anonymous=is_anonymous, creator_id=1,
-                create_time=datetime.datetime.now())
-    sigh.tags.extend(tag_models)
-    db.session.add(sigh)
-    db.session.commit()
-    return redirect(url_for('frontend.render_sigh', sigh_id=sigh.id_))
+        return jsonify(form.errors), 405
 
 
 @oauth_views.route('login/')

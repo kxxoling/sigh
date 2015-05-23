@@ -46,20 +46,21 @@ html
                           button.close(type="button", data-dismiss="modal", aria-hidden="true") ×
                           h4.modal-title Publish a sigh
                         .modal-body
-                          .form-group
+                          .content.form-group
                             label(for="content") Content
                             textarea.form-control(type="text", name="content")
+                            span.tip
                           .form-group
                             label(for="type_") Type
-                            .btn-group(data-toggle='buttons')
+                            .btn-group(data-toggle="buttons")
                               label.btn.btn-primary.active
-                                input(type='radio', name='sigh', autocomplete='off', checked='')
+                                input(type="radio", name="type_", value="sigh",  autocomplete="off", checked="")
                                 | Sigh
                               label.btn.btn-primary
-                                input(type='radio', name='wtf', autocomplete='off')
+                                input(type="radio", name="type_", value="wtf", autocomplete="off")
                                 | WTF
                               label.btn.btn-primary
-                                input#option3(type='radio', name='fml', autocomplete='off')
+                                input(type="radio", name="type_", value="fml", autocomplete="off")
                                 | FML
 
                           .form-group
@@ -105,9 +106,7 @@ html
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
     script(src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
     script(src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js")
-    script
-      $(".tags.select2").select2({
-        tags: true
-      })
+
+    script(src=url_for('static', filename='js/main.js'), )
     {% endblock %}
     {% block script %}{% endblock %}
