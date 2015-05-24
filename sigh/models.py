@@ -30,7 +30,7 @@ class BasicMixin(object):
                                      getattr(self, 'name', None) or getattr(self, 'title', 'Untitled'))
 
 
-class SessionMinin(object):
+class SessionMixin(object):
     def save(self):
         db.session.add(self)
         db.session.commit()
@@ -42,7 +42,7 @@ class SessionMinin(object):
         return self
 
 
-class User(db.Model, BasicMixin, SessionMinin):
+class User(db.Model, BasicMixin, SessionMixin):
     __tablename__ = 'users'
 
     name = db.Column(db.String(100))
@@ -58,7 +58,7 @@ tag_identifier = db.Table('tag_identifier',
                           db.Column('sigh_id', db.Integer, db.ForeignKey('sighs.id_')))
 
 
-class Sigh(db.Model, BasicMixin, SessionMinin):
+class Sigh(db.Model, BasicMixin, SessionMixin):
     __tablename__ = 'sighs'
 
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id_'))
@@ -68,7 +68,7 @@ class Sigh(db.Model, BasicMixin, SessionMinin):
     tags = db.relationship('Tag', secondary=tag_identifier)
 
 
-class Tag(db.Model, BasicMixin, SessionMinin):
+class Tag(db.Model, BasicMixin, SessionMixin):
     __tablename__ = 'tags'
 
     name = db.Column(db.String(50), unique=True, nullable=False)
