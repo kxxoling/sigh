@@ -5,42 +5,42 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/ind
 {% endblock %}
 
 {% block main %}
-{% for sigh in sighs %}
-.sigh
-  p {{ sigh.content or 'Empty!' }}
-  div
-    a.btn(href="", role="button", data-toggle="modal", data-target="#comment") Comment »
-    #comment.modal.fade(role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
-      .modal-dialog
-        .modal-content
-          .modal-header
-            button.close(type="button", data-dismiss="modal", aria-hidden="true") ×
-            h4.modal-title
-              | Modal title
-          .modal-body
-            | ...
-          .modal-footer
-            button.btn.btn-default(type="button", data-dismiss="modal") Close
-            button.btn.btn-primary(type="button") Save changes
+{% for sigh in sighs_pagination.items %}
+.sigh.clearfix
+  p {{ sigh.content }}
+
   .tags
     {% for tag in sigh.tags %}
     span.label.label-default {{ tag.display_name }}
     {% endfor %}
+  .pull-right
+    a(href=url_for('frontend.render_sigh', sigh_id = sigh.id_)) Comment »
 
 hr
 {% endfor %}
 
+
 ul.pagination
+  {% if sighs_pagination.has_prev %}
   li
-    a(href="#") Prev
+    a(href=url_for('frontend.index', page_num=sighs_pagination.prev_num)) &laquo;
+  {% endif %}
+
+  {% for page in sighs_pagination.iter_pages() %}
+  {% if page == sighs_pagination.page %}
+  li.active
+    a.active(href="#") {{ page }}
+  {% else %}
   li
-    a(href="#") 1
+    a(href=url_for('frontend.index', page_num=page)) {{ page }}
+  {% endif %}
+  {% endfor %}
+
+  {% if sighs_pagination.has_next %}
   li
-    a(href="#") 2
-  li
-    a(href="#") 3
-  li
-    a(href="#") Next
+    a(href=url_for('frontend.index', page_num=sighs_pagination.next_num)) &raquo;
+  {% endif %}
+
 
 {% endblock %}
 
