@@ -5,7 +5,7 @@ from wtforms import Form, FieldList
 from wtforms import StringField
 from wtforms.validators import DataRequired
 
-from .models import Sigh, Tag
+from .models import Sigh, Tag, Comment
 
 
 class TagForm(Form):
@@ -27,3 +27,19 @@ class SighForm(ModelForm):
         sigh.tags.extend(tags)
         sigh.save()
         return sigh
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+
+    def save(self, **kwargs):
+        # A strange error occurred here: two dict type variable kwargs and self.data seams are read-only?
+        dct = {}
+        for k in kwargs:
+            dct[k] = kwargs[k]
+        for k in self.data:
+            dct[k] = self.data[k]
+        comment = Comment(**dct)
+        comment.save()
+        return comment

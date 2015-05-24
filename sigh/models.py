@@ -51,6 +51,7 @@ class User(db.Model, BasicMixin, SessionMixin):
     role = db.Column(db.Integer)
     sighs = db.relationship('Sigh')
     tags = db.relationship('Tag')
+    comments = db.relationship('Comment')
 
 
 tag_identifier = db.Table('tag_identifier',
@@ -65,6 +66,7 @@ class Sigh(db.Model, BasicMixin, SessionMixin):
     content = db.Column(db.Text, nullable=False)
     type_ = db.Column(db.Enum('sigh', 'wtf', 'fml'), nullable=False)
     is_anonymous = db.Column(db.Boolean, default=False)
+    comments = db.relationship('Comment')
     tags = db.relationship('Tag', secondary=tag_identifier)
 
 
@@ -74,3 +76,13 @@ class Tag(db.Model, BasicMixin, SessionMixin):
     name = db.Column(db.String(50), unique=True, nullable=False)
     display_name = db.Column(db.String(50), unique=True, nullable=False)
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id_'))
+
+
+class Comment(db.Model, BasicMixin, SessionMixin):
+    __tablename__ = 'comments'
+
+    content = db.Column(db.Text, nullable=False)
+    sigh_id = db.Column(db.Integer, db.ForeignKey('sighs.id_'))
+    sigh = db.relationship('Sigh')
+    creator_id = db.Column(db.Integer, db.ForeignKey('users.id_'))
+    creator = db.relationship('User')

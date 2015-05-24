@@ -1,10 +1,10 @@
 from flask import Blueprint
 from flask import render_template, jsonify
 from flask import url_for, request
-from flask import redirect
 
 from ..models import Sigh
-from ..forms import SighForm
+from ..forms import SighForm, CommentForm
+from ..models import Comment
 
 
 frontend_views = Blueprint('frontend', __name__, url_prefix='/')
@@ -13,6 +13,8 @@ frontend_views = Blueprint('frontend', __name__, url_prefix='/')
 @frontend_views.route('/')
 @frontend_views.route('<int:page_num>/')
 def index(page_num=1):
+    co = Comment(content='Hello', sigh_id=1, creator_id=1)
+    co.save()
     sighs_pagination = Sigh.query.order_by(Sigh.create_time.desc()).paginate(page_num, per_page=20, error_out=True)
     return render_template('index.jade', page_title='Programmer sighs!', sighs_pagination=sighs_pagination)
 
@@ -20,7 +22,8 @@ def index(page_num=1):
 @frontend_views.route('sigh/<int:sigh_id>/')
 def render_sigh(sigh_id):
     sigh = Sigh.query.get_or_404(sigh_id)
-    return render_template('sigh.jade', page_title='Programmer sighs!', sigh=sigh)
+    comments = sigh.comments
+    return render_template('sigh.jade', page_title='Programmer sighs!', sigh=sigh, comments=comments)
 
 
 @frontend_views.route('new/', methods=['POST'])
@@ -36,3 +39,15 @@ def post_sigh():
         ))
     else:
         return jsonify(form.errors), 405
+
+
+@frontend_views.route('sigh/<int:sigh_id>/comment/', methods=['POST'])
+def post_comment(sigh_id):
+    """TODO: Should be login required later"""
+    form = CommentForm(request.form)
+    if form.validate():
+        comment = form.save(creator_id=1, sigh_id=sigh_id)
+        return comment.to_json('creator_id', 'content', 'id_', 'create_time', 'sigh_id')
+    else:
+        return jsonify(form.errors), 405
+

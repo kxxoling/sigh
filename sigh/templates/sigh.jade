@@ -17,10 +17,17 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/sig
 hr
 
 .comment-group
-  div.comment
-    form.navbar-form.navbar-left.comment(role="search")
-      textarea.form-control.comment(rows="3")
+  {% for comment in comments %}
+  .comment
+    p {{ comment.content }}
+  {% endfor %}
+  .comment
+    form.navbar-form.navbar-left.comment(role="form", method="POST", action=url_for('frontend.post_comment', sigh_id=sigh.id_))
+      textarea.form-control.comment(rows="3", name="content")
       button.btn.btn-default(type="submit") Comment
 
 {% endblock %}
 
+{% block script %}
+script(src=url_for('static', filename='js/sigh.js'))
+{% endblock %}
