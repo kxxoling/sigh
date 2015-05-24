@@ -30,6 +30,9 @@ def post_sigh():
     form = SighForm(request.form)
     if form.validate():
         sigh = form.save()
-        return redirect(url_for('frontend.render_sigh', sigh_id=sigh.id_))
+        return jsonify(dict(
+            sigh_id=sigh.id_,
+            redirect_url=url_for('frontend.render_sigh', sigh_id=sigh.id_),
+        ))
     else:
         return jsonify(form.errors), 405
