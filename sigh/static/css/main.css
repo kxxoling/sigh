@@ -57,3 +57,7 @@ border-color: #cdbfe3;
 form#new .select2 {
   width: 100% !important;
 }
+
+.cat img {
+  width: 100%;
+}
