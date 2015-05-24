@@ -11,10 +11,13 @@ $().ready(function () {
       type: $form.attr("method"),
       url: $form.attr("action"),
       data: $form.serialize(),
-      success: function(data, status) {
+      success: function(e, status) {
+        if (e.redirect_url){
+          window.location.href = e.redirect_url;
+        }
       },
       error: function(e, status) {
-        errors = e.responseJSON;
+        var errors = e.responseJSON;
         $form.find(".content").addClass("has-error").find("span.tip").text(errors.content[0])
       }
     });
