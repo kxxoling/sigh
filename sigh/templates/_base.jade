@@ -92,8 +92,24 @@ html
 
           {% block main %}{% endblock %}
         .col-md-4.column
+          .site-status.table-responsive
+            table.table
+              tr
+                td Registered Users Count:
+                td {{ g.user_count }}
+              tr
+                td Posted Sighs Count:
+                td {{ g.sigh_count }}
+              tr
+                td Comments Count:
+                td {{ g.comment_count }}
+              tr
+                td Tags Count:
+                td {{ g.tag_count }}
 
-          h1 Empty for something
+          .cat
+            a(href="http://thecatapi.com")
+              img(src="http://thecatapi.com/api/images/get?format=src&type=gif")
 
 
     .footer
