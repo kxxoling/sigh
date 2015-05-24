@@ -4,6 +4,6 @@ Flask-OAuthlib
 Flask-OpenID
 Flask-SQLAlchemy
 Flask-WTF
-WTF-SQLAlchemy
+WTForms-Alchemy
 PyJade
 
