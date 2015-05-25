@@ -24,8 +24,6 @@ def get_site_info():
 @frontend_views.route('/')
 @frontend_views.route('<int:page_num>/')
 def index(page_num=1):
-    co = Comment(content='Hello', sigh_id=1, creator_id=1)
-    co.save()
     sighs_pagination = Sigh.query.order_by(Sigh.create_time.desc()).paginate(page_num, per_page=20, error_out=True)
     return render_template('index.jade', page_title='Programmer sighs!', sighs_pagination=sighs_pagination)
 
