@@ -1,5 +1,7 @@
 from flask import Flask
 from flask import send_file
+from flask import request
+from flask.ext.babel import Babel
 
 from .views.frontend import frontend_views
 from .views.auth import oauth_views
@@ -24,6 +26,7 @@ def create_app(config=None):
     main_db.app = app
     main_db.create_all()
 
+    register_babel(app)
     register_jinja(app)
     register_static(app)
     register_oauth(app, oauth)
@@ -61,3 +64,15 @@ def register_static(app):
 def register_jinja(app):
     app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
     return app
+
+
+def register_babel(app):
+    babel = Babel(app)
+    app.jinja_env.add_extension('jinja2.ext.with_')
+
+    @babel.localeselector
+    def get_locale():
+        match = app.config['BABEL_SUPPORTED_LOCALES']
+        default = app.config['BABEL_DEFAULT_LOCALE']
+        return request.accept_languages.best_match(match, default)
+    return babel

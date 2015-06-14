@@ -2,6 +2,7 @@ from flask import Blueprint
 from flask import url_for, session, request
 from flask import redirect, flash
 from flask.ext.oauthlib.client import OAuth
+from flask.ext.babel import gettext as _
 
 
 oauth_views = Blueprint('oauth', __name__, url_prefix='/oauth/')
@@ -35,7 +36,7 @@ def github_authorized():
         )
     session['github_token'] = (resp['access_token'], '')
     user = github.get('user')
-    flash('%s, Welcome!' % user.data['name'])
+    flash(_('%s, Welcome!') % user.data['name'])
     return redirect('/')
 
 

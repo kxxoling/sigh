@@ -13,3 +13,6 @@ GITHUB = dict(
     consumer_key='08db72ce47a207704fb4',
     consumer_secret='f5e5eff75760ea886e033a6ec87b23d33d4903a0',
 )
+
+BABEL_DEFAULT_LOCALE = 'zh'
+BABEL_SUPPORTED_LOCALES = ['en', 'zh']

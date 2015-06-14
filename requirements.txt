@@ -1,6 +1,7 @@
 SQLALCHEMY >= 1.0
 Flask
 Flask-Admin
+Flask-Babel
 Flask-OAuthlib
 Flask-OpenID
 Flask-SQLAlchemy

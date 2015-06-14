@@ -26,32 +26,32 @@ html
             .collapse.navbar-collapse
               ul.nav.navbar-nav
                 li
-                  a(href="/") Home
+                  a(href="/") {{ _('Home') }}
                 li
-                  a(href="/admin") Admin
+                  a(href="/admin") {{ _('Admin') }}
 
               form.navbar-form.navbar-left(role="search")
                 .form-group
                   input.form-control(type="text")
-                button.btn.btn-default(type="submit") Search
+                button.btn.btn-default(type="submit") {{ _('Search') }}
 
               ul.nav.navbar-nav.navbar-right
                 li
 
-                  a.post-new.btn.btn-default(href="", role="button", data-toggle="modal", data-target="#new") POST
+                  a.post-new.btn.btn-default(href="", role="button", data-toggle="modal", data-target="#new") {{ _('POST') }}
                   form#new.modal.fade(role="form", method="POST", action=url_for('frontend.post_sigh'))
                     .modal-dialog
                       .modal-content
                         .modal-header
                           button.close(type="button", data-dismiss="modal", aria-hidden="true") ×
-                          h4.modal-title Publish a sigh
+                          h4.modal-title {{ _('Publish a sigh') }}
                         .modal-body
                           .content.form-group
-                            label(for="content") Content
+                            label(for="content") {{ _('Content') }}
                             textarea.form-control(type="text", name="content")
                             span.tip
                           .form-group
-                            label(for="type_") Type
+                            label(for="type_") {{ _('Type') }}
                             .btn-group(data-toggle="buttons")
                               label.btn.btn-primary.active
                                 input(type="radio", name="type_", value="sigh",  autocomplete="off", checked="")
@@ -64,8 +64,9 @@ html
                                 | FML
 
                           .form-group
-                            label(for="content") Tags
-                            select.select2.input-lg.form-control.tags(data-tags="true", data-placeholder="Tags", name="tags", multiple="multiple")
+                            label(for="content") {{ _('Tags') }}
+                            select.select2.input-lg.form-control.tags(data-tags="true", name="tags", multiple="multiple",
+                                                                      data-placeholder=_('Tags'))
                               option python
                               option 工作
                               option PHP
@@ -74,17 +75,17 @@ html
                             label
                               input(type="checkbox", name="is_anonymous")
                               | Publish as anonymous?
-                            button.btn.btn-default(type="submit") Submit
+                            button.btn.btn-default(type="submit") {{ _('Submit') }}
                         .modal-footer
                 li.placeholder(style="width: 15px; min-height: 1px;")
                 li.dropdown
                   a.avatar.middle.dropdown-toggle(href="#", data-toggle="dropdown", style="")
                   ul.dropdown-menu
                     li
-                      a(href="#") Profile
+                      a(href="#") {{ _('Profile') }}
                     li.divider
                     li
-                      a(href="#") Logout
+                      a(href="#") {{ _('Logout') }}
 
 
       .row.clearfix.main
