@@ -66,7 +66,7 @@ class Sigh(db.Model, BasicMixin, SessionMixin):
     content = db.Column(db.Text, nullable=False)
     type_ = db.Column(db.Enum('sigh', 'wtf', 'fml'), nullable=False)
     is_anonymous = db.Column(db.Boolean, default=False)
-    comments = db.relationship('Comment')
+    comments = db.relationship('Comment', order_by="desc(Comment.create_time)")
     tags = db.relationship('Tag', secondary=tag_identifier)
 
 
