@@ -60,3 +60,19 @@ def post_comment(sigh_id):
     else:
         return jsonify(form.errors), 405
 
+
+@frontend_views.route('tag/')
+def render_tags():
+    tags = Tag.query.all()
+    return render_template('tags.jade', tags=tags)
+
+
+@frontend_views.route('tag/<int:tag_id>/')
+@frontend_views.route('tag/<int:tag_id>/<int:page_num>/')
+def get_sighs_by_tag(tag_id, page_num=1):
+    tag = Tag.query.get_or_404(tag_id)
+    sighs_pagination = Sigh.query.filter_by(id_=tag.id_)\
+                           .order_by(Sigh.create_time.desc())\
+                           .paginate(page_num, per_page=20, error_out=True)
+    return render_template('tag.jade', tag=tag, sighs_pagination=sighs_pagination)
+

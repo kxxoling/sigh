@@ -76,6 +76,7 @@ class Tag(db.Model, BasicMixin, SessionMixin):
     name = db.Column(db.String(50), unique=True, nullable=False)
     display_name = db.Column(db.String(50), unique=True, nullable=False)
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id_'))
+    sighs = db.relationship('Sigh', order_by="desc(Sigh.id_)", secondary=tag_identifier)
 
 
 class Comment(db.Model, BasicMixin, SessionMixin):

@@ -1,0 +1,18 @@
+{% extends "_base.jade" %}
+
+{% block style %}
+link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/tags.css'))
+{% endblock %}
+
+{% block main %}
+section(tagcloud)
+  {% for tag in tags %}
+  span(tagcloud-weight="10") {{ tag.display_name }}
+    a.sighs-count(href="/tag/{{tag.id_}}") {{ tag.sighs | length }}
+  {% endfor %}
+{% endblock %}
+
+{% block script %}
+script(src=url_for('static', filename='js/tagCloud.js'))
+{% endblock %}
+
