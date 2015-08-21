@@ -3,9 +3,7 @@ Flask
 Flask-Admin
 Flask-Babel
 Flask-OAuthlib
-Flask-OpenID
 Flask-SQLAlchemy
 Flask-WTF
 WTForms-Alchemy
 PyJade
-
