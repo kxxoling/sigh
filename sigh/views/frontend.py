@@ -1,7 +1,7 @@
 from flask import Blueprint
-from flask import render_template, jsonify
+from flask import render_template, jsonify, abort
 from flask import url_for, request
-from flask import g
+from flask import g, session
 
 from ..models import Sigh
 from ..forms import SighForm, CommentForm
@@ -19,6 +19,17 @@ def get_site_info():
     g.comment_count = Comment.query.count()
     g.sigh_count = Sigh.query.count()
     g.tag_count = Tag.query.count()
+
+
+@frontend_views.before_request
+def get_current_user():
+    g.user_id = session.get('user_id')
+
+    def get_current_user():
+        if g.user_id is None:
+            return None
+        return User.query.get(g.user_id)
+    g.get_current_user = get_current_user
 
 
 @frontend_views.route('/')
@@ -76,3 +87,15 @@ def get_sighs_by_tag(tag_id, page_num=1):
                            .paginate(page_num, per_page=20, error_out=True)
     return render_template('tag.jade', tag=tag, sighs_pagination=sighs_pagination)
 
+
+@frontend_views.route('u/<int:user_id>/')
+@frontend_views.route('u/<username>/')
+def render_profile(user_id=None, username=None):
+    if user_id is not None:
+        user = User.query.get_or_404(user_id)
+    elif username is not None:
+        user = User.get_or_404(username=username)
+    else:
+        abort(404)
+
+    return render_template('profile.jade', user=user)

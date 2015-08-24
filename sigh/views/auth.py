@@ -4,6 +4,8 @@ from flask import redirect, flash
 from flask.ext.oauthlib.client import OAuth
 from flask.ext.babel import gettext as _
 
+from ..models import User
+
 
 oauth_views = Blueprint('oauth', __name__, url_prefix='/oauth/')
 
@@ -23,6 +25,7 @@ def github_login():
 @oauth_views.route('logout')
 def github_logout():
     session.pop('github_token', None)
+    session.pop('user_id', None)
     return redirect(url_for('frontend.index'))
 
 
@@ -35,8 +38,18 @@ def github_authorized():
             request.args['error_description'],
         )
     session['github_token'] = (resp['access_token'], '')
-    user = github.get('user')
-    flash(_('%s, Welcome!') % user.data['name'])
+    data = github.get('user').data
+    flash('%s, Welcome!' % data['name'])
+    try:
+        user = User.query.filter_by(github_id=unicode(data['id']))[0]
+    except IndexError:
+        user = User(email=data['email'],
+                    username=data['login'],
+                    github_id=data['id'],
+                    avatar=data['avatar_url'],
+                    name=data['name'])
+        user.save()
+    session.update(user_id=user.id_)
     return redirect('/')
 
 

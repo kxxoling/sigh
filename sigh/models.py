@@ -1,6 +1,7 @@
 import datetime
 
 from flask import jsonify
+from flask import abort
 from flask.ext.sqlalchemy import SQLAlchemy
 
 
@@ -11,6 +12,17 @@ class BasicMixin(object):
 
     id_ = db.Column(db.Integer, primary_key=True)
     create_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)          # First time the column is created.
+
+    @classmethod
+    def get_or_404(cls, id_=None, **kwargs):
+        if id_ is not None:
+            obj = cls.query.get(id_)
+        else:
+            objs = cls.query.filter_by(**kwargs)
+            obj = objs and objs[0] or None
+        if obj is None:
+            abort(404)
+        return obj
 
     def to_json(self, *columns):
         dct = self.to_dict(*columns)
@@ -45,9 +57,11 @@ class SessionMixin(object):
 class User(db.Model, BasicMixin, SessionMixin):
     __tablename__ = 'users'
 
+    username = db.Column(db.String(50))
     name = db.Column(db.String(100))
     email = db.Column(db.String(50))
-    family_name = db.Column(db.String(100))
+    avatar = db.Column(db.String(50))
+    github_id = db.Column(db.String(20), unique=True)
     role = db.Column(db.Integer)
     sighs = db.relationship('Sigh')
     tags = db.relationship('Tag')

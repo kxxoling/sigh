@@ -1,0 +1,21 @@
+{% extends "_base.jade" %}
+{% block style %}
+link(rel="stylesheet", type="text/css", href=url_for('static', filename = 'css/profile.css'))
+{% endblock %}
+
+{% block main %}
+a(href="{{ user.profile_url }}")
+  img(src="{{ user.avatar }}")
+div
+  span {{ user.username }}
+div
+  span {{ user.name or '' }}
+  span
+  span {{ user.family_name or '' }}
+div
+   span {{ user.email or '' }}
+{% endblock %}
+
+{% block script %}
+script(src=url_for('static', filename = 'js/profile.js'))
+{% endblock %}

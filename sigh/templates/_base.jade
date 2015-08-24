@@ -81,12 +81,16 @@ html
                 li.dropdown
                   a.avatar.middle.dropdown-toggle(href="#", data-toggle="dropdown", style="")
                   ul.dropdown-menu
+                    {% if g.user_id %}
                     li
-                      a(href="#") {{ _('Profile') }}
+                      a(href=url_for('frontend.render_profile', user_id=1)) {{ _('Profile') }}
                     li.divider
                     li
-                      a(href="#") {{ _('Logout') }}
-
+                      a(href=url_for('oauth.github_logout')) {{ _('Logout') }}
+                    {% else %}
+                    li
+                      a(href=url_for('oauth.github_login')) {{ _('Login') }}
+                    {% endif %}
 
       .row.clearfix.main
         .col-md-8.column
