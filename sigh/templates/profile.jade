@@ -4,18 +4,56 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename = 'css/p
 {% endblock %}
 
 {% block main %}
-a(href="{{ user.profile_url }}")
-  img(src="{{ user.avatar }}")
-div
-  span {{ user.username }}
-div
-  span {{ user.name or '' }}
-  span
-  span {{ user.family_name or '' }}
-div
-   span {{ user.email or '' }}
+.panel.panel-default.profile
+  h1.panel-body
+    span {{ user.name or '' }}
+    span
+    span {{ user.family_name or '' }}
+    span
+      | (
+      | {{ user.username }}
+      | )
+  .panel-body
+    .align-left
+      a.avatar(href="{{ user.profile_url }}")
+        img(src="{{ user.avatar }}")
+    .align-right
+      .email.content-el
+        span Email:
+        span {{ user.email or '' }}
+      .github.content-el
+        span GitHub:
+        span
+          a(href='//github.com/')
+            | @{{ user.github or '' }}
+
+
+.user-content
+  ul.nav.nav-tabs(role='tablist')
+    li.active(role='presentation')
+      a(href='#sigh-pane', role='tab', data-toggle='tab') Sigh
+    li(role='presentation')
+      a(href='#comment-pane', role='tab', data-toggle='tab') Comment
+  .tab-content
+    #sigh-pane.tab-pane.active(role='tabpanel')
+      .content-list
+        .content
+          .sigh-content
+            a(href='')
+              | first content
+    #comment-pane.tab-pane(role='tabpanel')
+      .content-list
+        .content
+          .sigh-content
+            a(href='') sigh content
+          .comment-content
+            a(href='') comment of sigh
+
+
 {% endblock %}
 
 {% block script %}
 script(src=url_for('static', filename = 'js/profile.js'))
+script
+
 {% endblock %}

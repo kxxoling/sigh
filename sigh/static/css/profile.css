@@ -1,0 +1,39 @@
+.profile .avatar img {
+  width: 160px;
+  height: 160px;
+}
+
+.profile .align-left, .profile .align-right {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.profile .panel-body .content-el {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.profile .align-left {
+  width: 180px;
+}
+
+.profile .align-right {
+  width: 400px;
+}
+
+.panel.profile h1.panel-body {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.user-content .tab-content {
+  border: solid 1px #dddddd;
+  border-top: none;
+}
+
+.user-content .tab-content .content-list {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
