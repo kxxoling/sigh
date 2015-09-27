@@ -19,10 +19,10 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename = 'css/p
         img(src="{{ user.avatar }}")
     .align-right
       .email.content-el
-        span Email:
+        i.fa.fa-envelope
         span {{ user.email or '' }}
       .github.content-el
-        span GitHub:
+        i.fa.fa-github
         span
           a(href='//github.com/')
             | @{{ user.github or '' }}
