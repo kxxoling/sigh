@@ -57,12 +57,14 @@ class SessionMixin(object):
 class User(db.Model, BasicMixin, SessionMixin):
     __tablename__ = 'users'
 
-    username = db.Column(db.String(50))
+    username = db.Column(db.String(50), unique=True)
     name = db.Column(db.String(100))
     email = db.Column(db.String(50))
     avatar = db.Column(db.String(50))
     github_id = db.Column(db.String(20), unique=True)
+    github_username = db.Column(db.String(50))
     role = db.Column(db.Integer)
+
     sighs = db.relationship('Sigh')
     tags = db.relationship('Tag')
     comments = db.relationship('Comment')
@@ -89,7 +91,7 @@ class Tag(db.Model, BasicMixin, SessionMixin):
 
     name = db.Column(db.String(50), unique=True, nullable=False)
     display_name = db.Column(db.String(50), unique=True, nullable=False)
-    creator_id = db.Column(db.Integer, db.ForeignKey('users.id_'))
+    creator_id = db.Column(db.Integer, db.ForeignKey('users.id_'))      # This could be NULL when it's created bu system
     sighs = db.relationship('Sigh', order_by="desc(Sigh.id_)", secondary=tag_identifier)
 
 
