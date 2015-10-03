@@ -23,8 +23,7 @@ def create_app(config=None):
 
     #: prepare for database
     main_db.init_app(app)
-    main_db.app = app
-    main_db.create_all()
+    app.db = main_db
 
     register_babel(app)
     register_jinja(app)

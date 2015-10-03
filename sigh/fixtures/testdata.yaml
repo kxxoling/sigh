@@ -1,0 +1,48 @@
+---
+  users:
+    -
+      id_: 1
+      create_time: 2015-10-03 15:41:45.748552
+      username: "kxxoling"
+      name: "Kane Blueriver"
+      email: "kxxoling@gmail.com"
+      avatar: "https://avatars.githubusercontent.com/u/1227139?v=3"
+      github_id: "1227139"
+      github_username: "kxxoling"
+
+  tags:
+    -
+      id_: 1
+      create_time: 2015-10-03 16:47:40.000000
+      name: "programming language"
+      display_name: "编程语言"
+      creator_id: 1
+    -
+      id_: 2
+      create_time: 2015-10-03 16:47:40.000000
+      name: "PHP"
+      display_name: "PHP"
+      creator_id: 1
+    -
+      id_: 3
+      create_time: 2015-10-03 16:47:40.000000
+      name: "Python"
+      display_name: "Python"
+      creator_id: 1
+
+  sighs:
+    -
+      id_: 1
+      create_time: 2015-10-03 16:41:19.000193
+      content: "PHP 才是最好的编程语言，不服来辩！"
+      type_: "wtf"
+      is_anonymous: 1
+      creator_id: 1
+
+  tag_identifier:
+    -
+      tag_id: 2
+      sigh_id: 1
+    -
+      tag_id: 1
+      sigh_id: 1
