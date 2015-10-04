@@ -6,6 +6,7 @@ from flask.ext.babel import Babel
 from .views.frontend import frontend_views
 from .views.auth import oauth_views
 from .views.auth import oauth
+from .views.api import api_views
 from .models import db as main_db
 from .models import index
 from .admin import register_admin
@@ -41,6 +42,7 @@ def create_app(config=None):
 def register_routes(app):
     app.register_blueprint(frontend_views)
     app.register_blueprint(oauth_views)
+    app.register_blueprint(api_views)
     return app
 
 
