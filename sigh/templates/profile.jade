@@ -24,8 +24,8 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename = 'css/p
       .github.content-el
         i.fa.fa-github
         span
-          a(href='//github.com/')
-            | @{{ user.github or '' }}
+          a(href='//github.com/{{user.github_username or "" }}')
+            | @{{ user.github_username or '' }}
 
 
 .user-content
