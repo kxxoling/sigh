@@ -39,6 +39,16 @@ def index(page_num=1):
     return render_template('index.jade', page_title='Programmer sighs!', sighs_pagination=sighs_pagination)
 
 
+@frontend_views.route('search/sigh')
+def search_sigh():
+    q = request.args.get('q')
+    g.q = q
+    page_num = request.args.get('page_num', 1)
+    sighs_pagination = Sigh.query.whoosh_search(q).paginate(page_num, per_page=20, error_out=True)
+
+    return render_template('search.jade', page_title='Programmer sighs!', sighs_pagination=sighs_pagination)
+
+
 @frontend_views.route('sigh/<int:sigh_id>/')
 def render_sigh(sigh_id):
     sigh = Sigh.query.get_or_404(sigh_id)

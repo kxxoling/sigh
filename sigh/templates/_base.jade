@@ -32,9 +32,9 @@ html
                 li
                   a(href="/admin") {{ _('Admin') }}
 
-              form.navbar-form.navbar-left(role="search")
+              form.navbar-form.navbar-left(role="search", method="GET", action=url_for('frontend.search_sigh'))
                 .form-group
-                  input.form-control(type="text")
+                  input.form-control(type="text", name="q", value=g.q)
                 button.btn.btn-default(type="submit") {{ _('Search') }}
 
               ul.nav.navbar-nav.navbar-right
