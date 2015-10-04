@@ -91,8 +91,8 @@ class Sigh(db.Model, BasicMixin, SessionMixin):
 class Tag(db.Model, BasicMixin, SessionMixin):
     __tablename__ = 'tags'
 
-    name = db.Column(db.String(50), unique=True, nullable=False)
     display_name = db.Column(db.String(50), unique=True, nullable=False)
+    searchable_name = db.Column(db.String(500), unique=True, nullable=False)
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id_'))      # This could be NULL when it's created bu system
     sighs = db.relationship('Sigh', order_by="desc(Sigh.id_)", secondary=tag_identifier)
 

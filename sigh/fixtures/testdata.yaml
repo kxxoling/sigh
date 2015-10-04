@@ -14,19 +14,19 @@
     -
       id_: 1
       create_time: 2015-10-03 16:47:40.000000
-      name: "programming language"
+      searchable_name: "programming language 编程语言 bianchengyuya"
       display_name: "编程语言"
       creator_id: 1
     -
       id_: 2
       create_time: 2015-10-03 16:47:40.000000
-      name: "PHP"
+      searchable_name: "PHP"
       display_name: "PHP"
       creator_id: 1
     -
       id_: 3
       create_time: 2015-10-03 16:47:40.000000
-      name: "Python"
+      searchable_name: "Python"
       display_name: "Python"
       creator_id: 1
 
