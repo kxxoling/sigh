@@ -81,6 +81,7 @@ class Sigh(db.Model, BasicMixin, SessionMixin):
     __searchable__ = ['content']
 
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id_'))
+    creator = db.relationship('User')
     content = db.Column(db.Text, nullable=False)
     type_ = db.Column(db.Enum('sigh', 'wtf', 'fml'), nullable=False)
     is_anonymous = db.Column(db.Boolean, default=False)

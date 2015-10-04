@@ -1,3 +1,5 @@
+import json
+
 from flask import Blueprint
 from flask import render_template, jsonify, abort
 from flask import url_for, request
@@ -53,7 +55,13 @@ def search_sigh():
 def render_sigh(sigh_id):
     sigh = Sigh.query.get_or_404(sigh_id)
     comments = sigh.comments
-    return render_template('sigh.jade', page_title='Programmer sighs!', sigh=sigh, comments=comments)
+
+    users_on_page = [comment.creator.username for comment in comments]
+    if sigh.creator.username not in users_on_page:
+        users_on_page.append(sigh.creator.username)
+
+    return render_template('sigh.jade', page_title='Programmer sighs!',
+                           sigh=sigh, comments=comments, users_on_page=json.dumps(users_on_page))
 
 
 @frontend_views.route('new/', methods=['POST'])

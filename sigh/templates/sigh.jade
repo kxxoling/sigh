@@ -30,4 +30,17 @@ hr
 
 {% block script %}
 script(src=url_for('static', filename='js/sigh.js'))
+
+script
+  function initAtWho($el, data) { // Init AtWho.js plugin
+    $el.atwho({
+      at: "@",
+      data: data
+    });
+  }
+
+  // Init AtWho with data
+  $comment = $("textarea.comment");
+  var data = {{ users_on_page | safe }};
+  initAtWho($comment, data);
 {% endblock %}
