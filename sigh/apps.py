@@ -7,6 +7,7 @@ from .views.frontend import frontend_views
 from .views.auth import oauth_views
 from .views.auth import oauth
 from .models import db as main_db
+from .models import index
 from .admin import register_admin
 
 
@@ -24,6 +25,8 @@ def create_app(config=None):
     #: prepare for database
     main_db.init_app(app)
     app.db = main_db
+    with app.app_context():
+        index(app)
 
     register_babel(app)
     register_jinja(app)

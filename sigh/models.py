@@ -3,6 +3,7 @@ import datetime
 from flask import jsonify
 from flask import abort
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.whooshalchemy import whoosh_index
 
 
 db = SQLAlchemy()
@@ -77,6 +78,7 @@ tag_identifier = db.Table('tag_identifier',
 
 class Sigh(db.Model, BasicMixin, SessionMixin):
     __tablename__ = 'sighs'
+    __searchable__ = ['content']
 
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id_'))
     content = db.Column(db.Text, nullable=False)
@@ -103,3 +105,8 @@ class Comment(db.Model, BasicMixin, SessionMixin):
     sigh = db.relationship('Sigh')
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id_'))
     creator = db.relationship('User')
+
+
+def index(app):
+    for model in [Sigh]:
+        whoosh_index(app, model)

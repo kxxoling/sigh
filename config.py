@@ -8,6 +8,7 @@ SECRET_KEY = 'you-will-never-guess'
 
 SQLITE = 'db.sqlite3'
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, SQLITE) + '?check_same_thread=False'
+WHOOSH_BASE = os.path.join(BASE_DIR, '.whoosh/')
 
 GITHUB = dict(
     consumer_key='08db72ce47a207704fb4',
