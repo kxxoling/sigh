@@ -56,12 +56,12 @@ def render_sigh(sigh_id):
     sigh = Sigh.query.get_or_404(sigh_id)
     comments = sigh.comments
 
-    users_on_page = [comment.creator.username for comment in comments]
-    if sigh.creator.username not in users_on_page:
-        users_on_page.append(sigh.creator.username)
+    # users_on_page = [comment.creator.username for comment in comments]
+    # if sigh.creator.username not in users_on_page:
+    #     users_on_page.append(sigh.creator.username)
 
     return render_template('sigh.jade', page_title='Programmer sighs!',
-                           sigh=sigh, comments=comments, users_on_page=json.dumps(users_on_page))
+                           sigh=sigh, comments=comments)
 
 
 @frontend_views.route('new/', methods=['POST'])

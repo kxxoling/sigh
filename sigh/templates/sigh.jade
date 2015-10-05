@@ -32,15 +32,23 @@ hr
 script(src=url_for('static', filename='js/sigh.js'))
 
 script
-  function initAtWho($el, data) { // Init AtWho.js plugin
+  function initAtWho($el, url) { // Init AtWho.js plugin
     $el.atwho({
       at: "@",
-      data: data
+      searchKey: 'username',
+      displayTpl: '<li><img src="${avatar}" style="width: 24px; height: 24px"> ${username} - ${name}</li>',
+      insertTpl: '@${username}',
+      callbacks: {
+        remoteFilter: function(query, callback){
+          $.getJSON(url+query, function(data){
+            callback(data);
+          });
+        }
+      }
     });
   }
 
   // Init AtWho with data
   $comment = $("textarea.comment");
-  var data = {{ users_on_page | safe }};
-  initAtWho($comment, data);
+  initAtWho($comment, '/api/user/autocompletion/');
 {% endblock %}
