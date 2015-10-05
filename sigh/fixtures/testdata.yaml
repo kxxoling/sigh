@@ -9,6 +9,24 @@
       avatar: "https://avatars.githubusercontent.com/u/1227139?v=3"
       github_id: "1227139"
       github_username: "kxxoling"
+    -
+      id_: 2
+      create_time: 2015-10-04 15:41:45.748552
+      username: "windrunner1992"
+      name: "藤原妹红"
+      email: "windrunner1992@gmail.com"
+      avatar: "https://avatars.githubusercontent.com/u/9313171?v=3"
+      github_id: "9313171"
+      github_username: "windrunner1992"
+    -
+      id_: 3
+      create_time: 2015-10-05 15:41:45.748552
+      username: "kxxoling_faker"
+      name: "Kane Blueriver Faker"
+      email: "k.xxoling@gmail.com"
+      avatar: "https://avatars.githubusercontent.com/u/1227139?v=3"
+      github_id: "1234567"
+      github_username: "kxxoling_faker"
 
   tags:
     -
