@@ -32,4 +32,24 @@ $().ready(function () {
     self.siblings("span.tip").text("");
   });
 
+  $("select.select2.tags").select2({
+    ajax: {
+      delay: 500,
+      url: function(params){
+        return '/api/tag/autocompletion/' + params.term
+      },
+      processResults: function (oriData) {
+        var data = [];
+        oriData.forEach(function(d){
+          data.push({
+            id: d['id_'],
+            text: d['display_name']
+          })
+        });
+        return {results: data}
+      },
+      cache: "true"
+    }
+  });
+
 });
