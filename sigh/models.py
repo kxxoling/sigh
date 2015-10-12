@@ -2,6 +2,7 @@ import datetime
 
 from flask import jsonify
 from flask import abort
+from flask import url_for
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.whooshalchemy import whoosh_index
 
@@ -69,6 +70,13 @@ class User(db.Model, BasicMixin, SessionMixin):
     sighs = db.relationship('Sigh')
     tags = db.relationship('Tag')
     comments = db.relationship('Comment')
+
+    @property
+    def profile_url(self):
+        return url_for('frontend.render_profile', user_id=self.id_)
+
+    def split_avatar(self, width):
+        return '{}&s={}'.format(self.avatar, width)
 
 
 tag_identifier = db.Table('tag_identifier',
