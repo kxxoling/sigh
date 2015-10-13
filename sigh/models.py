@@ -41,7 +41,9 @@ class BasicMixin(object):
 
     def __unicode__(self):
         return "<Model %s>%d: %s" % (self.__class__.__name__, self.id_,
-                                     getattr(self, 'name', None) or getattr(self, 'title', 'Untitled'))
+                                     getattr(self, 'name', None) or
+                                     getattr(self, 'display_name', None) or
+                                     getattr(self, 'title', ''))
 
 
 class SessionMixin(object):
