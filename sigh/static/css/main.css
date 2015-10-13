@@ -45,15 +45,6 @@ border-color: #cdbfe3;
   padding: 6px 12px;
 }
 
-.sigh {
-  margin-bottom: 15px;
-  padding: 15px;
-}
-
-.sigh p {
-  font-size: 18px;
-}
-
 form#new .select2 {
   width: 100% !important;
 }

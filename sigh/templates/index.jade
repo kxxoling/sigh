@@ -5,18 +5,27 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/ind
 {% endblock %}
 
 {% block main %}
+
 {% for sigh in sighs_pagination.items %}
-.sigh.clearfix
-  p {{ sigh.content }}
+.list-item.sigh.clearfix(class="{{ sigh.type_ if sigh.type_!='sigh' else '' }}")
+  .relate-info.clearfix
+    .pull-left
+      .avatar(style="background-image: url({{ sigh.creator.split_avatar(40) }})")
+      a.name(data-username=sigh.creator.username, href=sigh.creator.profile_url)
+        | {{ sigh.creator.name }}
+    .pull-right
+      span.time {{ sigh.create_time | timeago }}
 
-  .tags
-    {% for tag in sigh.tags %}
-    span.label.label-default {{ tag.display_name }}
-    {% endfor %}
-  .pull-right
-    a(href=url_for('frontend.render_sigh', sigh_id = sigh.id_)) Comment »
+  .content
+    p {{ sigh.content | md }}
 
-hr
+  .item-foot
+    .pull-right.tags
+      {% for tag in sigh.tags %}
+      span.label.label-default {{ tag.display_name }}
+      {% endfor %}
+    .pull-left
+      a(href=url_for('frontend.render_sigh', sigh_id = sigh.id_)) {{ _('Comment') }} »
 {% endfor %}
 
 
