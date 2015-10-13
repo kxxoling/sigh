@@ -10,6 +10,7 @@ from .views.api import api_views
 from .models import db as main_db
 from .models import index
 from .admin import register_admin
+from .utils import timeago
 
 
 def create_app(config=None):
@@ -35,6 +36,7 @@ def create_app(config=None):
     register_oauth(app, oauth)
     register_routes(app)
     register_admin(app, main_db)
+    register_filter(app, timeago=timeago)
 
     return app
 
@@ -80,3 +82,7 @@ def register_babel(app):
         default = app.config['BABEL_DEFAULT_LOCALE']
         return request.accept_languages.best_match(match, default)
     return babel
+
+
+def register_filter(app, **filters):
+    app.jinja_env.filters.update(filters)
