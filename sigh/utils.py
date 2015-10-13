@@ -1,4 +1,5 @@
 import datetime
+import misaka
 from flask.ext.babel import gettext as _
 
 
@@ -16,4 +17,10 @@ def timeago(dt):
 	if delta < datetime.timedelta(days=2):
 		return _('1 day ago')
 	return _('{} days ago').format(delta.days)
+
+
+def plain_markdown(text):
+	renderer = misaka.HtmlRenderer(flags=misaka.HTML_ESCAPE)
+	md = misaka.Markdown(renderer)
+	return md.render(text)
 
