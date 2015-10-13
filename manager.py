@@ -6,7 +6,8 @@ from flask.ext.debugtoolbar import DebugToolbarExtension
 from flask.ext.script import Manager
 
 from sigh.apps import create_app
-from sigh.models import User, Sigh, Tag
+from sigh.models import db
+from sigh.models import User, Sigh, Tag, tag_identifier
 
 
 base_dir = os.path.dirname(os.path.realpath(__file__))
@@ -42,19 +43,18 @@ def load(fxtdir='fixtures/', app_name='sigh'):
     fixture_file = os.path.join(fixture_dir, 'testdata.yaml')
     with open(fixture_file) as f:
         fixture_data = yaml.load(f.read())
-    user_data = fixture_data['users']
-    sigh_data = fixture_data['sighs']
-    tag_data = fixture_data['tags']
+
+    data_pairs = ((User, fixture_data['users']),
+        (Sigh, fixture_data['sighs']),
+        (Tag, fixture_data['tags']))
 
     with application.app_context():
-        for user in user_data:
-            User(**user).save()
+        for table, datas in data_pairs:
+            for data in datas:
+                table(**data).save()
 
-        for sigh in sigh_data:
-            Sigh(**sigh).save()
-
-        for tag in tag_data:
-            Tag(**tag).save()
+        for data in fixture_data['tag_identifiers']:
+            db.engine.execute(tag_identifier.insert().values(**data))
 
 
 if __name__ == '__main__':
