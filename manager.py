@@ -32,7 +32,12 @@ def runserver(port=5000, host='0.0.0.0', init=False):
     debug_app(application)
     if init is True:
         application.db.create_all()
-    application.run(debug=True, host=host, port=port)
+    try:
+        from livereload import Server
+        server = Server(application)
+        server.serve(port=port)
+    except ImportError:
+        application.run(debug=True, host=host, port=port)
 
 
 @manager.command
