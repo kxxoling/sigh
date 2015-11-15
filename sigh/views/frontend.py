@@ -31,7 +31,7 @@ def get_current_user():
         if g.user_id is None:
             return None
         return User.query.get(g.user_id)
-    g.get_current_user = get_current_user
+    g.current_user = get_current_user()
 
 
 @frontend_views.route('/')

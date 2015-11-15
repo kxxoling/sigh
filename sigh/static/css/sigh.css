@@ -1,4 +1,80 @@
+div, p, span, a {
+  font-size: 16px;
+}
+
 .comment-group .comment {
   width: 100%;
 }
 
+.avatar-container .avatar {
+  width: 100%;
+  height: 100%;
+}
+
+.avatar-container {
+  width: 80px;
+  height: 80px;
+  display: inline-block;
+}
+
+.content-container {
+  position: absolute;
+  padding-left: 100px;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+
+.sigh-container {
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.sigh {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.comment-form {
+  position: relative;
+  height: 130px;
+}
+
+.comment-form textarea{
+  margin-bottom: 10px;
+}
+
+.comment-form .avatar {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.comment-form form.comment {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding-left: 50px;
+}
+
+.comment-group {
+  margin-bottom: 10px;
+}
+
+table.comment .avatar {
+  width: 40px;
+  height: 40px;
+}
+
+table.comment td.left {
+  width: 50px;
+}
+
+table.comment td {
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

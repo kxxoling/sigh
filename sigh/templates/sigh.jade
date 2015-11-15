@@ -1,12 +1,24 @@
 {% extends "_base.jade" %}
 
 {% block style %}
+link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/main.css'))
 link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/sigh.css'))
 {% endblock %}
 
 {% block main %}
 .sigh
-  p {{ sigh.content or 'Empty!' }}
+  .sigh-container.clear-fix
+    .avatar-container
+      .avatar(style="background-image: url({{ sigh.creator.split_avatar(80) }})")
+    .content-container
+      .relate-info.clearfix
+        .pull-left
+          a.name(data-username=sigh.creator.username, href=sigh.creator.profile_url)
+            | {{ sigh.creator.name }}
+        .pull-right
+          span.time {{ sigh.create_time | timeago }}
+      .content
+        p {{ sigh.content }}
 
   {% if sigh.tags %}
   .tags
@@ -14,18 +26,30 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/sig
     span.label.label-default {{ tag.display_name }}
     {% endfor %}
   {% endif %}
-hr
 
-.comment-group
-  {% for comment in comments %}
-  .comment
-    p {{ comment.content }}
-  {% endfor %}
-  .comment
-    form.navbar-form.navbar-left.comment(role="form", method="POST", action=url_for('frontend.post_comment', sigh_id=sigh.id_))
+.comment-group.list-item
+  .comment-form
+    .avatar(style="background-image: url({{ g.current_user.split_avatar(40) if g.current_user or g.default_avatar }})")
+    form.comment(role="form", method="POST", action=url_for('frontend.post_comment', sigh_id=sigh.id_))
       textarea.form-control.comment(rows="3", name="content")
-      button.btn.btn-default(type="submit") Comment
+      .pull-right
+        button.btn.btn-default(type="submit", class="{{ 'disabled' if not g.current_user }}") Comment
 
+  table.comment
+    {% for comment in comments %}
+    tr
+      td.left
+        .avatar(style="background-image: url({{ comment.creator.split_avatar(40) }})")
+      td.right
+        .relate-info.clearfix
+          .pull-left
+            a.name(data-username=comment.creator.username, href=comment.creator.profile_url)
+              | {{ comment.creator.name }}
+          .pull-right
+            span.time {{ comment.create_time | timeago }}
+        .content
+          p {{ comment.content }}
+    {% endfor %}
 {% endblock %}
 
 {% block script %}
