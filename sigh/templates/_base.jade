@@ -81,7 +81,8 @@ html
                         .modal-footer
                 li.placeholder(style="width: 15px; min-height: 1px;")
                 li.dropdown
-                  a.avatar.middle.dropdown-toggle(href="#", data-toggle="dropdown", style="")
+                  a.avatar.middle.dropdown-toggle(href="#", data-toggle="dropdown",
+                      style="background-image: url({{ g.current_user.split_avatar(50) if g.current_user or g.default_avatar }})")
                   ul.dropdown-menu
                     {% if g.user_id %}
                     li
