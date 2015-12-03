@@ -54,21 +54,21 @@
       create_time: 2015-10-03 16:41:19.000193
       content: "PHP 才是最好的编程语言，不服来辩！\n\nPHP 才是最好的编程语言，不服来辩！\n\nPHP 才是最好的编程语言，不服来辩！\n\n"
       type_: "wtf"
-      is_anonymous: 1
+      is_anonymous: true
       creator_id: 1
     -
       id_: 2
       create_time: 2015-10-05 16:41:19.000193
       content: "Python 大法好！"
       type_: "sigh"
-      is_anonymous: 0
+      is_anonymous: false
       creator_id: 1
     -
       id_: 3
       create_time: 2015-10-07 16:41:19.000193
       content: "产品经理又改需求了！"
       type_: "fml"
-      is_anonymous: 0
+      is_anonymous: false
       creator_id: 2
 
   tag_identifiers:
