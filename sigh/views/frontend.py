@@ -118,4 +118,14 @@ def render_profile(user_id=None, username=None):
     else:
         abort(404)
 
-    return render_template('profile.jade', user=user)
+    page_num, per_page = 1, 20
+    sighs_pagination = Sigh.query.filter_by(creator_id=user_id)\
+            .order_by(Sigh.create_time.desc())\
+            .paginate(page_num, per_page=20, error_out=True)
+    comments_pagination = Comment.query.filter_by(creator_id=user_id)\
+            .order_by(Comment.create_time.desc())\
+            .paginate(page_num, per_page=20, error_out=True)
+
+    return render_template('profile.jade', user=user,
+                           sighs_pagination=sighs_pagination,
+                           comments_pagination=comments_pagination)

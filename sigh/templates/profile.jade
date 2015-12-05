@@ -37,17 +37,21 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename = 'css/p
   .tab-content
     #sigh-pane.tab-pane.active(role='tabpanel')
       .content-list
+        {% for sigh in sighs_pagination.items %}
         .content
           .sigh-content
-            a(href='')
-              | first content
+            a(href=url_for('frontend.render_sigh', sigh_id=sigh.id_))
+              | {{ sigh.content }}
+        {% endfor %}
     #comment-pane.tab-pane(role='tabpanel')
       .content-list
+        {% for comment in comments_pagination.items %}
         .content
           .sigh-content
-            a(href='') sigh content
+            a(href=url_for('frontend.render_sigh', sigh_id=comment.sigh_id)) {{ comment.content }}
           .comment-content
-            a(href='') comment of sigh
+            a(href='') {{ comment.content }}
+        {% endfor %}
 
 
 {% endblock %}
