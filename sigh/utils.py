@@ -4,7 +4,7 @@ from flask.ext.babel import gettext as _
 
 
 def timeago(dt):
-    now = datetime.datetime.now()
+    now = datetime.datetime.utcnow()
     delta = now - dt
     print delta
     if delta < datetime.timedelta(minutes=2):
