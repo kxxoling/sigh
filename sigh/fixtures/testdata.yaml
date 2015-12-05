@@ -84,3 +84,18 @@
     -
       tag_id: 3
       sigh_id: 2
+
+  comments:
+    -
+      id_: 1
+      creator_id: 1
+      sigh_id: 1
+      create_time: 2015-10-07 16:47:40.000000
+      content: "正是如此"
+    -
+      id_: 2
+      creator_id: 2
+      sigh_id: 1
+      create_time: 2015-10-17 16:47:40.000000
+      content: "As you got it."
+

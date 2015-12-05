@@ -7,7 +7,7 @@ from flask.ext.script import Manager
 
 from sigh.apps import create_app
 from sigh.models import db
-from sigh.models import User, Sigh, Tag, tag_identifier
+from sigh.models import User, Sigh, Tag, tag_identifier, Comment
 
 
 base_dir = os.path.dirname(os.path.realpath(__file__))
@@ -51,12 +51,13 @@ def load(fxtdir='fixtures/', app_name='sigh'):
 
     data_pairs = ((User, fixture_data['users']),
         (Sigh, fixture_data['sighs']),
-        (Tag, fixture_data['tags']))
+        (Tag, fixture_data['tags']),
+        (Comment, fixture_data['comments']))
 
     with application.app_context():
-        for table, datas in data_pairs:
+        for model, datas in data_pairs:
             for data in datas:
-                table(**data).save()
+                model(**data).save()
 
         for data in fixture_data['tag_identifiers']:
             db.engine.execute(tag_identifier.insert().values(**data))
