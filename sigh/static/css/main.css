@@ -18,8 +18,8 @@ border-color: #cdbfe3;
 }
 
 .footer {
-  margin-top: -30px;
-  height: 30px;
+  margin-top: -60px;
+  height: 60px;
   background-color: #eee;
 }
 
@@ -28,7 +28,7 @@ border-color: #cdbfe3;
 }
 
 .container > .main.row {
-  padding-bottom: 30px;
+  padding-bottom: 60px;
   overflow: hidden;
 }
 
@@ -51,4 +51,20 @@ form#new .select2 {
 
 .cat img {
   width: 100%;
+}
+
+.footer .container {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer ul.friend-links {
+  padding-top: 20px;
+  font-size: 16px;
+}
+
+.footer li {
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
 }

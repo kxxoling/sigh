@@ -4,6 +4,7 @@ from flask import Blueprint
 from flask import render_template, jsonify, abort
 from flask import url_for, request
 from flask import g, session
+from flask import current_app
 
 from ..models import Sigh
 from ..forms import SighForm, CommentForm
@@ -21,6 +22,7 @@ def get_site_info():
     g.comment_count = Comment.query.count()
     g.sigh_count = Sigh.query.count()
     g.tag_count = Tag.query.count()
+    g.friend_links  = current_app.config['FRIEND_LINKS']
 
 
 @frontend_views.before_request

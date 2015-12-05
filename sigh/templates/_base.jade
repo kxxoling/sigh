@@ -121,10 +121,12 @@ html
 
 
     .footer
-      .contact-message
-        ul
+      .container.row.clearfix
+        ul.friend-links.col-md-12.column
+          {% for name, link in g.friend_links.items() %}
           li
-            a(href='/') Meaningless link
+            a(href=link, target='_blank') {{ name }}
+          {% endfor %}
 
     {% block default_script %}
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
