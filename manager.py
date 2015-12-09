@@ -17,7 +17,6 @@ manager = Manager(application)
 
 
 def debug_app(app):
-    app.debug = True
     toolbar = DebugToolbarExtension()
     toolbar.init_app(app)
 
@@ -37,7 +36,7 @@ def runserver(port=5000, host='0.0.0.0', init=False):
         server = Server(application)
         server.serve(port=port)
     except ImportError:
-        application.run(debug=True, host=host, port=port)
+        application.run(host=host, port=port)
 
 
 @manager.command
