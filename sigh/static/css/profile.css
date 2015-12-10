@@ -31,7 +31,7 @@
   border-top: none;
 }
 
-.user-content .tab-content .content-list {
+.user-content .tab-content .item-list {
   padding-left: 15px;
   padding-right: 15px;
   padding-top: 20px;
@@ -40,4 +40,46 @@
 
 .profile .fa {
   margin-right: 10px;
+}
+
+.user-content .item .sigh-footer {
+  font-size: 14px;
+}
+
+.user-content .item-list>.item {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.user-content .item-list>.item:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.user-content .item .content {
+  font-size: 16px;
+  margin-right: 50px;
+  margin-bottom: 10px;
+}
+
+.user-content .item .comment {
+  font-size: 16px;
+}
+
+.user-content .item .comment .comment-context {
+  color: #ccc;
+  font-size: 14px;
+}
+
+.tab-pane .item {
+  position: relative;
+}
+
+.tab-pane .item .avatar {
+  position: absolute;
+  right: 0;
+  top: 0;
 }

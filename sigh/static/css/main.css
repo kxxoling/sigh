@@ -68,3 +68,7 @@ form#new .select2 {
   margin-left: 10px;
   margin-right: 10px;
 }
+
+.datetime {
+  color: #999;
+}
