@@ -98,7 +98,7 @@ def render_tags():
     return render_template('tags.jade', tags=tags)
 
 
-@frontend_views.route('tag/<int:tag_id>/')
+@frontend_views.route('tag/<int:tag_id>/', endpoint='get_sighs_by_tag')
 @frontend_views.route('tag/<int:tag_id>/<int:page_num>/')
 def get_sighs_by_tag(tag_id, page_num=1):
     tag = Tag.query.get_or_404(tag_id)
