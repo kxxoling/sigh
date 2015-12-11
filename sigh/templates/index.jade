@@ -5,6 +5,8 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/ind
 {% endblock %}
 
 {% block main %}
+{% block custom_title %}
+{% endblock %}
 
 {% for sigh in sighs_pagination.items %}
 .list-item.sigh.clearfix(class="{{ sigh.type_ if sigh.type_!='sigh' else '' }}")
