@@ -1,14 +1,16 @@
 {% extends "_base.jade" %}
 
 {% block style %}
+link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/arrow.css'))
 link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/tags.css'))
 {% endblock %}
 
 {% block main %}
-section(tagcloud)
+.tags
   {% for tag in tags %}
-  span(tagcloud-weight="10") {{ tag.display_name }}
-    a.sighs-count(href="/tag/{{tag.id_}}") {{ tag.sighs | length }}
+  span.tag.btn.btn-primary.btn-arrow-right
+    a.tag-name(href=url_for('frontend.get_sighs_by_tag', tag_id=tag.id_)) {{ tag.display_name }}
+    span.tag-count {{ tag.sighs_count }}
   {% endfor %}
 {% endblock %}
 

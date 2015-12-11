@@ -1,0 +1,13 @@
+.tag a.tag-name {
+  color: #eee;
+  text-decoration: none;
+}
+
+.tags .tag {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.tags .tag .tag-name {
+  margin-right: 12px;
+}
