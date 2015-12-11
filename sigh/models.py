@@ -107,6 +107,11 @@ class Tag(db.Model, BasicMixin, SessionMixin):
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id_'))      # This could be NULL when it's created bu system
     sighs = db.relationship('Sigh', order_by="desc(Sigh.id_)", secondary=tag_identifier)
 
+    @property
+    def sighs_count(self):
+        query = db.session.query(tag_identifier).filter_by(tag_id=self.id_)
+        return query.count()
+
 
 class Comment(db.Model, BasicMixin, SessionMixin):
     __tablename__ = 'comments'
