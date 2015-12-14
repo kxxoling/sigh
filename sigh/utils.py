@@ -6,7 +6,6 @@ from flask.ext.babel import gettext as _
 def timeago(dt):
     now = datetime.datetime.utcnow()
     delta = now - dt
-    print delta
     if delta < datetime.timedelta(minutes=2):
         return _('Just now')
     if delta < datetime.timedelta(hours=1):
