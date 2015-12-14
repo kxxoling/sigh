@@ -12,6 +12,8 @@ SQLITE = 'db.sqlite3'
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, SQLITE) + '?check_same_thread=False'
 WHOOSH_BASE = os.path.join(BASE_DIR, '.whoosh/')
 
+DEBUG_TB_INTERCEPT_REDIRECTS = False
+
 GITHUB = dict(
     consumer_key='08db72ce47a207704fb4',
     consumer_secret='f5e5eff75760ea886e033a6ec87b23d33d4903a0',
