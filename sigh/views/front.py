@@ -13,10 +13,10 @@ from ..models import User
 from ..models import Tag
 
 
-frontend_views = Blueprint('frontend', __name__, url_prefix='/')
+front_views = Blueprint('front', __name__, url_prefix='/')
 
 
-@frontend_views.before_request
+@front_views.before_request
 def get_site_info():
     g.user_count = User.query.count()
     g.comment_count = Comment.query.count()
@@ -25,7 +25,7 @@ def get_site_info():
     g.friend_links  = current_app.config['FRIEND_LINKS']
 
 
-@frontend_views.before_request
+@front_views.before_request
 def get_current_user():
     g.user_id = session.get('user_id')
 
@@ -36,14 +36,14 @@ def get_current_user():
     g.current_user = get_current_user()
 
 
-@frontend_views.route('/')
-@frontend_views.route('<int:page_num>/')
+@front_views.route('/')
+@front_views.route('<int:page_num>/')
 def index(page_num=1):
     sighs_pagination = Sigh.query.order_by(Sigh.create_time.desc()).paginate(page_num, per_page=20, error_out=True)
     return render_template('index.jade', page_title='Programmer sighs!', sighs_pagination=sighs_pagination)
 
 
-@frontend_views.route('search/sigh')
+@front_views.route('search/sigh')
 def search_sigh():
     q = request.args.get('q')
     g.q = q
@@ -53,7 +53,7 @@ def search_sigh():
     return render_template('search.jade', page_title='Programmer sighs!', sighs_pagination=sighs_pagination)
 
 
-@frontend_views.route('sigh/<int:sigh_id>/')
+@front_views.route('sigh/<int:sigh_id>/')
 def render_sigh(sigh_id):
     sigh = Sigh.query.get_or_404(sigh_id)
     comments = sigh.comments
@@ -66,7 +66,7 @@ def render_sigh(sigh_id):
                            sigh=sigh, comments=comments)
 
 
-@frontend_views.route('new/', methods=['POST'])
+@front_views.route('new/', methods=['POST'])
 def post_sigh():
     """TODO: Should be login required later"""
 
@@ -75,13 +75,13 @@ def post_sigh():
         sigh = form.save()
         return jsonify(dict(
             sigh_id=sigh.id_,
-            redirect_url=url_for('frontend.render_sigh', sigh_id=sigh.id_),
+            redirect_url=url_for('front.render_sigh', sigh_id=sigh.id_),
         ))
     else:
         return jsonify(form.errors), 405
 
 
-@frontend_views.route('sigh/<int:sigh_id>/comment/', methods=['POST'])
+@front_views.route('sigh/<int:sigh_id>/comment/', methods=['POST'])
 def post_comment(sigh_id):
     """TODO: Should be login required later"""
     form = CommentForm(request.form)
@@ -92,14 +92,14 @@ def post_comment(sigh_id):
         return jsonify(form.errors), 405
 
 
-@frontend_views.route('tag/')
+@front_views.route('tag/')
 def render_tags():
     tags = Tag.query.all()
     return render_template('tags.jade', tags=tags)
 
 
-@frontend_views.route('tag/<int:tag_id>/', endpoint='get_sighs_by_tag')
-@frontend_views.route('tag/<int:tag_id>/<int:page_num>/')
+@front_views.route('tag/<int:tag_id>/', endpoint='get_sighs_by_tag')
+@front_views.route('tag/<int:tag_id>/<int:page_num>/')
 def get_sighs_by_tag(tag_id, page_num=1):
     tag = Tag.query.get_or_404(tag_id)
     sighs_pagination = Sigh.query.filter_by(id_=tag.id_)\
@@ -108,8 +108,8 @@ def get_sighs_by_tag(tag_id, page_num=1):
     return render_template('tag.jade', tag=tag, sighs_pagination=sighs_pagination)
 
 
-@frontend_views.route('u/<int:user_id>/')
-@frontend_views.route('u/<username>/')
+@front_views.route('u/<int:user_id>/')
+@front_views.route('u/<username>/')
 def render_profile(user_id=None, username=None):
     if user_id is not None:
         user = User.query.get_or_404(user_id)

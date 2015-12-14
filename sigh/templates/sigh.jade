@@ -30,7 +30,7 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/sig
 .comment-group.list-item
   .comment-form
     .avatar(style="background-image: url({{ g.current_user.split_avatar(40) if g.current_user or g.default_avatar }})")
-    form.comment(role="form", method="POST", action=url_for('frontend.post_comment', sigh_id=sigh.id_))
+    form.comment(role="form", method="POST", action=url_for('front.post_comment', sigh_id=sigh.id_))
       textarea.form-control.comment(rows="3", name="content")
       .pull-right
         button.btn.btn-default(type="submit", class="{{ 'disabled' if not g.current_user }}") Comment

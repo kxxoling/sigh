@@ -26,7 +26,7 @@ def github_login():
 def github_logout():
     session.pop('github_token', None)
     session.pop('user_id', None)
-    return redirect(url_for('frontend.index'))
+    return redirect(url_for('front.index'))
 
 
 @oauth_views.route('login/authorized')

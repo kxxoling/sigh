@@ -27,14 +27,14 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/ind
       span.label.label-default {{ tag.display_name }}
       {% endfor %}
     .pull-left
-      a(href=url_for('frontend.render_sigh', sigh_id = sigh.id_)) {{ _('Comment') }} »
+      a(href=url_for('front.render_sigh', sigh_id = sigh.id_)) {{ _('Comment') }} »
 {% endfor %}
 
 
 ul.pagination
   {% if sighs_pagination.has_prev %}
   li
-    a(href=url_for('frontend.index', page_num=sighs_pagination.prev_num)) &laquo;
+    a(href=url_for('front.index', page_num=sighs_pagination.prev_num)) &laquo;
   {% endif %}
 
   {% for page in sighs_pagination.iter_pages() %}
@@ -43,13 +43,13 @@ ul.pagination
     a.active(href="#") {{ page }}
   {% else %}
   li
-    a(href=url_for('frontend.index', page_num=page)) {{ page }}
+    a(href=url_for('front.index', page_num=page)) {{ page }}
   {% endif %}
   {% endfor %}
 
   {% if sighs_pagination.has_next %}
   li
-    a(href=url_for('frontend.index', page_num=sighs_pagination.next_num)) &raquo;
+    a(href=url_for('front.index', page_num=sighs_pagination.next_num)) &raquo;
   {% endif %}
 
 

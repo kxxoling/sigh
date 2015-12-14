@@ -3,7 +3,7 @@ from flask import send_file
 from flask import request
 from flask.ext.babel import Babel
 
-from .views.frontend import frontend_views
+from .views.front import front_views
 from .views.auth import oauth_views
 from .views.auth import oauth
 from .views.api import api_views
@@ -42,7 +42,7 @@ def create_app(config=None):
 
 
 def register_routes(app):
-    app.register_blueprint(frontend_views)
+    app.register_blueprint(front_views)
     app.register_blueprint(oauth_views)
     app.register_blueprint(api_views)
     return app

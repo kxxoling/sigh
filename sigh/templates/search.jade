@@ -15,7 +15,7 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename = 'css/i
   {% endfor %}
 
   .pull-right
-    a(href=url_for('frontend.render_sigh', sigh_id = sigh.id_)) Comment »
+    a(href=url_for('front.render_sigh', sigh_id = sigh.id_)) Comment »
 
 hr
 {% endfor %}
@@ -24,7 +24,7 @@ hr
 ul.pagination
   {% if sighs_pagination.has_prev %}
   li
-    a(href=url_for('frontend.search_sigh', page_num=sighs_pagination.prev_num)) &laquo;
+    a(href=url_for('front.search_sigh', page_num=sighs_pagination.prev_num)) &laquo;
   {% endif %}
 
   {% for page in sighs_pagination.iter_pages() %}
@@ -33,13 +33,13 @@ ul.pagination
     a.active(href="#") {{ page }}
   {% else %}
   li
-    a(href=url_for('frontend.search_sigh', page_num=page)) {{ page }}
+    a(href=url_for('front.search_sigh', page_num=page)) {{ page }}
   {% endif %}
   {% endfor %}
 
   {% if sighs_pagination.has_next %}
   li
-    a(href=url_for('frontend.search_sigh', page_num=sighs_pagination.next_num)) &raquo;
+    a(href=url_for('front.search_sigh', page_num=sighs_pagination.next_num)) &raquo;
   {% endif %}
 
 {% endblock %}

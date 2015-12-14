@@ -32,7 +32,7 @@ html
                 li
                   a(href="/admin") {{ _('Admin') }}
 
-              form.navbar-form.navbar-left(role="search", method="GET", action=url_for('frontend.search_sigh'))
+              form.navbar-form.navbar-left(role="search", method="GET", action=url_for('front.search_sigh'))
                 .form-group
                   input.form-control(type="text", name="q", value=g.q)
                 button.btn.btn-default(type="submit") {{ _('Search') }}
@@ -41,7 +41,7 @@ html
                 li
 
                   a.post-new.btn.btn-default(href="", role="button", data-toggle="modal", data-target="#new") {{ _('POST') }}
-                  form#new.modal.fade(role="form", method="POST", action=url_for('frontend.post_sigh'))
+                  form#new.modal.fade(role="form", method="POST", action=url_for('front.post_sigh'))
                     .modal-dialog
                       .modal-content
                         .modal-header
@@ -86,7 +86,7 @@ html
                   ul.dropdown-menu
                     {% if g.user_id %}
                     li
-                      a(href=url_for('frontend.render_profile', user_id=1)) {{ _('Profile') }}
+                      a(href=url_for('front.render_profile', user_id=1)) {{ _('Profile') }}
                     li.divider
                     li
                       a(href=url_for('oauth.github_logout')) {{ _('Logout') }}

@@ -9,7 +9,7 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/tag
 .tags
   {% for tag in tags %}
   span.tag.btn.btn-primary.btn-arrow-right
-    a.tag-name(href=url_for('frontend.get_sighs_by_tag', tag_id=tag.id_)) {{ tag.display_name }}
+    a.tag-name(href=url_for('front.get_sighs_by_tag', tag_id=tag.id_)) {{ tag.display_name }}
     span.tag-count {{ tag.sighs_count }}
   {% endfor %}
 {% endblock %}

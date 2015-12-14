@@ -75,7 +75,7 @@ class User(db.Model, BasicMixin, SessionMixin):
 
     @property
     def profile_url(self):
-        return url_for('frontend.render_profile', user_id=self.id_)
+        return url_for('front.render_profile', user_id=self.id_)
 
     def split_avatar(self, width):
         return '{}&s={}'.format(self.avatar, width)
