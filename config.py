@@ -26,3 +26,5 @@ FRIEND_LINKS = {
     u'作者博客': '//blog.windrunner.info',
     u'项目地址': '//github.com/kxxoling/Programmer-Sign',
 }
+
+LOCAL_CONFIG = os.path.join(BASE_DIR, 'local_config.py')

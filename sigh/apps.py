@@ -13,16 +13,17 @@ from .admin import register_admin
 from .utils import timeago, plain_markdown
 
 
-def create_app(config=None):
+def create_app(default_config=None, config_spec=None):
     app = Flask(
         __name__,
         template_folder='templates'
     )
 
-    if isinstance(config, dict):
-        app.config.update(config)
-    elif config:
-        app.config.from_pyfile(config)
+    app.config.from_pyfile(default_config)
+    if app.config.get('LOCAL_CONFIG'):
+        app.config.from_pyfile(app.config['LOCAL_CONFIG'])
+    if isinstance(config_spec, dict):
+        app.config.update(config_spec)
 
     #: prepare for database
     main_db.init_app(app)

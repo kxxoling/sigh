@@ -13,7 +13,7 @@ from sigh.models import User, Sigh, Tag, tag_identifier, Comment
 
 base_dir = os.path.dirname(os.path.realpath(__file__))
 config_file = os.path.join(base_dir, 'config.py')
-application = create_app(config_file)
+application = create_app(default_config=config_file)
 manager = Manager(application)
 
 
