@@ -7,3 +7,4 @@ Flask-SQLAlchemy
 Flask-WTF
 WTForms-Alchemy
 PyJade
+Flask-ShellPlus

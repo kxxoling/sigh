@@ -4,6 +4,7 @@ import yaml
 
 from flask.ext.debugtoolbar import DebugToolbarExtension
 from flask.ext.script import Manager
+from flask.ext.shellplus import Shell
 
 from sigh.apps import create_app
 from sigh.models import db
@@ -60,6 +61,9 @@ def load(fxtdir='fixtures/', app_name='sigh'):
 
         for data in fixture_data['tag_identifiers']:
             db.engine.execute(tag_identifier.insert().values(**data))
+
+
+manager.add_command('shell', Shell(context=dict(app=application, db=db)))
 
 
 if __name__ == '__main__':
