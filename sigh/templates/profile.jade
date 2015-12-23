@@ -41,7 +41,7 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename = 'css/p
         {% for sigh in sighs_pagination.items %}
         .item
           .sigh-content
-            p {{ sigh.content }}
+            p {{ sigh.content | md }}
           .sigh-footer.clearfix
             .pull-left
               span.datetime 2015-12-12
@@ -58,10 +58,10 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename = 'css/p
               a(href=comment.sigh.profile_url)
                 img(src=comment.sigh.creator.split_avatar(40))
             blockquote.content.pull-left
-              {{ comment.sigh.content }}
+              {{ comment.sigh.content | md }}
           .comment
             .comment-content
-              a(href='') {{ comment.content }}
+              a(href='') {{ comment.content | md }}
             .comment-context Responsed at {{ comment.create_time }}
         {% endfor %}
 

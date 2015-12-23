@@ -18,7 +18,7 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/sig
         .pull-right
           span.time {{ sigh.create_time | timeago }}
       .content
-        p {{ sigh.content }}
+        p {{ sigh.content | md }}
 
   {% if sigh.tags %}
   .tags
@@ -48,7 +48,7 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/sig
           .pull-right
             span.time {{ comment.create_time | timeago }}
         .content
-          p {{ comment.content }}
+          p {{ comment.content | md }}
     {% endfor %}
 {% endblock %}
 
