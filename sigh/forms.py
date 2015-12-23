@@ -19,11 +19,12 @@ class SighForm(ModelForm):
 
     tags = FieldList(StringField('Tag', validators=[DataRequired(), ]))
 
-    def save(self):
+    def save(self, **kwargs):
         tag_list = self.data.get('tags')
         tags = filter(lambda x: x, [Tag.query.filter_by(name=tag).first() for tag in tag_list])
         self.data.pop('tags')
-        sigh = Sigh(**self.data)
+        kwargs.update(self.data)
+        sigh = Sigh(**kwargs)
         sigh.tags.extend(tags)
         sigh.save()
         return sigh

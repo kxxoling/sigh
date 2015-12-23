@@ -72,7 +72,7 @@ def post_sigh():
 
     form = SighForm(request.form)
     if form.validate():
-        sigh = form.save()
+        sigh = form.save(creator_id=g.user_id)
         return jsonify(dict(
             sigh_id=sigh.id_,
             redirect_url=url_for('front.render_sigh', sigh_id=sigh.id_),
@@ -86,7 +86,7 @@ def post_comment(sigh_id):
     """TODO: Should be login required later"""
     form = CommentForm(request.form)
     if form.validate():
-        comment = form.save(creator_id=1, sigh_id=sigh_id)
+        comment = form.save(creator_id=g.user_id, sigh_id=sigh_id)
         return comment.to_json('creator_id', 'content', 'id_', 'create_time', 'sigh_id')
     else:
         return jsonify(form.errors), 405
