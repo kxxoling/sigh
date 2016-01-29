@@ -64,17 +64,25 @@ div, p, span, a {
   margin-bottom: 10px;
 }
 
-table.comment .avatar {
-  width: 40px;
+.list .list-item {
+  position: relative;
+}
+
+.list-item .list-left {
+  position: absolute;
+  left 0;
+  top: 0;
+}
+
+.list-item .avatar {
   height: 40px;
+  width: 40px;
 }
 
-table.comment td.left {
-  width: 50px;
+.list-item .list-right {
+  margin-left: 50px;
 }
 
-table.comment td {
-  border-top: 1px solid #ccc;
-  padding-top: 10px;
-  padding-bottom: 10px;
+.comment.has-error textarea {
+  border-color: #f00 !important;
 }

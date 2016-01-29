@@ -29,18 +29,22 @@ link(rel="stylesheet", type="text/css", href=url_for('static', filename='css/sig
 
 .comment-group.list-item
   .comment-form
-    .avatar(style="background-image: url({{ g.current_user.split_avatar(40) if g.current_user or g.default_avatar }})")
+    .avatar(style="background-image: url({{ g.current_user.split_avatar(40) if g.current_user or g.default_avatar }})",
+            data-avatar="{{ g.current_user.split_avatar(40) if g.current_user or g.default_avatar }}",
+            data-id="{{ g.current_user.id_ }}",
+            data-username="{{ g.current_user.username }}",
+            data-name="{{ g.current_user.name }}")
     form.comment(role="form", method="POST", action=url_for('front.post_comment', sigh_id=sigh.id_))
       textarea.form-control.comment(rows="3", name="content")
       .pull-right
-        button.btn.btn-default(type="submit", class="{{ 'disabled' if not g.current_user }}") Comment
+        button.btn.btn-default.submit(type="submit", class="{{ 'disabled' if not g.current_user }}") Comment
 
-  table.comment
+  .comment.list
     {% for comment in comments %}
-    tr
-      td.left
+    .list-item
+      .list-left
         .avatar(style="background-image: url({{ comment.creator.split_avatar(40) }})")
-      td.right
+      .list-right
         .relate-info.clearfix
           .pull-left
             a.name(data-username=comment.creator.username, href=comment.creator.profile_url)
