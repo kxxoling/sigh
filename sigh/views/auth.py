@@ -2,7 +2,7 @@ from flask import Blueprint
 from flask import url_for, session, request
 from flask import redirect, flash
 from flask.ext.oauthlib.client import OAuth
-from flask.ext.babel import gettext as _
+from flask.ext.babelex import gettext as _
 
 from ..models import User
 

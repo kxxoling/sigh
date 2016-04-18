@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import send_file
 from flask import request
-from flask.ext.babel import Babel
+from flask_babelex import Babel
 
 from .views.front import front_views
 from .views.auth import oauth_views

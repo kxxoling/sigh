@@ -1,6 +1,6 @@
 import datetime
 import misaka
-from flask.ext.babel import gettext as _
+from flask.ext.babelex import gettext as _
 
 
 def timeago(dt):
