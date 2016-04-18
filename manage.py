@@ -5,6 +5,7 @@ import yaml
 from flask.ext.debugtoolbar import DebugToolbarExtension
 from flask.ext.script import Manager
 from flask.ext.shellplus import Shell
+from flask_migrate import MigrateCommand, Migrate
 
 from sigh.apps import create_app
 from sigh.models import db
@@ -13,7 +14,9 @@ from sigh.models import User, Sigh, Tag, tag_identifier, Comment
 
 base_dir = os.path.dirname(os.path.realpath(__file__))
 config_file = os.path.join(base_dir, 'config.py')
+
 application = create_app(default_config=config_file)
+Migrate(application, db)
 manager = Manager(application)
 
 
@@ -30,17 +33,14 @@ def manage_app(app, app_manager):
 def runserver(port=5000, host='0.0.0.0', init=False):
     port = int(port)
     debug_app(application)
-    if init is True:
-        application.db.create_all()
     application.run(host=host, port=port)
 
 
 @manager.command
 def load(fxtdir='fixtures/', app_name='sigh'):
-    application.db.create_all()
-
     fixture_dir = os.path.join(base_dir, app_name, fxtdir)
     fixture_file = os.path.join(fixture_dir, 'testdata.yaml')
+
     with open(fixture_file) as f:
         fixture_data = yaml.load(f.read())
 
@@ -59,6 +59,7 @@ def load(fxtdir='fixtures/', app_name='sigh'):
 
 
 manager.add_command('shell', Shell(context=dict(app=application, db=db)))
+manager.add_command('db', MigrateCommand)
 
 
 if __name__ == '__main__':
